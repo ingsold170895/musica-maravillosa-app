@@ -1,0 +1,16 @@
+.dropdownToolbarButton {
+  display: table-cell;
+  -webkit-appearance: none;
+  width: 150px; /* todo: remove with pdf.js 2.4 */
+  max-width: 150px; /* todo: remove with pdf.js 2.4 */
+}
+
+.dropdownToolbarButton > select {
+  width: 170px; /* todo: remove with pdf.js 2.4 */
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.1), screen and (min-resolution: 1.1dppx) {
+  .dropdownToolbarButton::after {
+    top: -1px;
+  }
+}

@@ -1,0 +1,43 @@
+
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 96vh;
+}
+
+.mat-display-2 {
+  height: 4rem;
+  background: #f6f6f6;
+  padding-top: 5px;
+  margin-bottom: 0;
+}
+
+.fix button{
+  position:fixed;
+  bottom:35px;
+  right:35px;
+  z-index: 2000;
+}
+
+mat-drawer-content{
+  height: 100%;
+}
+
+.background-loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* semi-transparent black  */
+  background-color: #000;
+  opacity: 0.75;
+
+  /* z-index must be below .jw-modal and above everything else  */
+  z-index: 900;
+  mat-progress-bar {
+    vertical-align: center;
+    z-index: 1000;
+  }
+}

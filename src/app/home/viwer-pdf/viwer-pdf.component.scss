@@ -1,0 +1,177 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+.pdf-container {
+  width: 75vh;
+  height: 100%;
+}
+
+:host {
+  background-color: white;
+}
+
+mat-grid-list {
+  padding-top: 0;
+}
+
+#toolbarViewer {
+  background-color: mat-color($candy-app-primary);
+}
+
+#toolbarViewerLeft {
+  width: 30%;
+
+  pdf-page-number {
+    float: left;
+  }
+}
+
+#toolbarViewerRight {
+  width: 30%;
+
+  button {
+    float: right;
+  }
+}
+
+.image-music {
+  height: 400px;
+  width: 100%;
+}
+
+.image-music img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.content-show {
+  height: 100px;
+}
+
+.buttons-box {
+}
+
+.buttons button {
+  &:disabled {
+    mat-icon {
+      color: rgba(211, 95, 23, 0.59);
+    }
+  }
+
+  mat-icon {
+    font-size: 33px;
+    color: $candy-app-accent-2;
+    display: inline;
+  }
+}
+
+.button-playing button {
+  mat-icon {
+    font-size: 30px;
+    color: mat-color($candy-app-accent);
+    display: inline;
+  }
+}
+
+.progress-bar {
+  mat-grid-tile-footer {
+    background-color: white;
+  }
+}
+
+#toolbarViewerRight {
+  button {
+    height: 30px;
+
+    mat-icon {
+      color: #c4bbb0; //fadcb6
+      vertical-align: sub;
+      font-size: 22px;
+    }
+  }
+
+}
+
+#audio-player {
+  width: 250px;
+  top: 2rem;
+}
+
+.mat-grid-tile .mat-figure {
+  /// display: block;
+}
+
+.button-send-Ejercicio {
+  text-align: end;
+  padding-top: 30px;
+
+  button {
+    padding: 15px;
+  }
+}
+
+.modal-resultado {
+  text-align: center;
+
+  mat-icon {
+    color: green;
+    font-size: 6rem;
+    height: auto;
+    width: auto;
+  }
+}
+
+
+.printPentagrama {
+  display: none;
+
+
+  body.jw-modal-open {
+    /* body overflow is hidden to hide main scrollbar when modal window is open */
+    overflow: hidden;
+  }
+
+}
+
+
+.divPrintPentagrama {
+  /* modal container fixed across whole screen */
+  position: fixed;
+  height: 500px;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+
+  /* z-index must be higher than .jw-modal-background */
+  z-index: 1000;
+
+  /* enables scrolling for tall modals */
+  overflow: auto;
+
+  .jw-modal-body {
+    padding: 20px;
+    background: #fff;
+
+    /* margin exposes part of the modal background */
+    margin: 40px;
+  }
+}
+
+.jw-modal-background {
+  /* modal background fixed across whole screen */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* semi-transparent black  */
+  background-color: #000;
+  opacity: 0.75;
+
+  /* z-index must be below .jw-modal and above everything else  */
+  z-index: 900;
+}

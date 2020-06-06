@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-header>
+    <div class="mat-card-title" >
+        {{aula.nombre}}
+      <button mat-icon-button color="primary" (click)="deleteAula()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content (click)="openClassroomData()">
+    <div class="align-self-center" (click)="openClassroomData()">
+      {{aula.colegio}}
+    </div>
+  </mat-card-content>
+  <mat-card-footer (click)="openClassroomData()">
+    <div class="clave-acceso align-content-center">
+      {{aula.claveAcceso}}
+    </div>
+  </mat-card-footer>
+</mat-card>
+
+

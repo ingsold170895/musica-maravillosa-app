@@ -1,0 +1,102 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+.mat-display-1 {
+  height: 5rem;
+  background: mat-color($candy-app-primary);
+  margin-bottom: 0;
+  padding: 15px;
+  color: white;
+}
+.container {
+  margin-top: 2rem;
+}
+
+.label-mis-tareas {
+  color: white;
+  font-size: xx-large;
+}
+
+.label-profesor {
+  color: #282828;
+}
+
+.label-profesor-name{
+  color: #3e2313;
+  font-size: 20px
+}
+
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: $color-app-accent;
+  animation: spinner .8s linear infinite;
+  padding-bottom: 25px;
+}
+
+.mat-column-fecha {
+  padding-right: 15px;
+}
+
+.mat-column-libro {
+  padding-right: 15px;
+}
+
+.mat-column-puntajeTotal {
+  width: 50px;
+}
+
+.mat-column-tipoEjercicioNombre {
+  width: 150px;
+}
+
+.mat-column-pagina{
+  width: 35px;
+}
+
+.mat-column-tema {
+  width: 150px;
+}
+
+.fix-logo img {
+  position: fixed;
+  top: 15px;
+  right: 0;
+  width: 16vw;
+}
+
+.fix button{
+  position:fixed;
+  bottom:15px;
+  right:35px;
+}
+
+.fix-children-image img{
+  position: fixed;
+  bottom: 2vh;
+  right: 2rem;
+  width: 21vw;
+  z-index: 500;
+}
+
+.fix-background {
+  img{
+    height: 100vh;
+    position: fixed;
+    z-index: -100;
+  }
+}

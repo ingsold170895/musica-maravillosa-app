@@ -1,0 +1,70 @@
+<h1 class="mat-display-1">Fonoteca</h1>
+<div class="container">
+  <mat-grid-list cols="2" rowHeight="30.3vh">
+
+    <mat-grid-tile rowspan="3">
+      <div class="form-search">
+        <p>
+          <button mat-flat-button type="button" class="btn btn-dark" color="primary" (click)="searchAll()">
+            <span>Listar Todos los Audios</span>
+          </button>
+        </p>
+        <p>
+          <br/>
+          <mat-label>Filtros de busqueda</mat-label>
+        </p>
+        <mat-divider></mat-divider>
+          <p>
+            <mat-checkbox class="example-margin" [(ngModel)]="letSearchByPage" (change)="searchByPage(1)"></mat-checkbox>
+            <mat-form-field>
+              <input matInput placeholder="Buscar por Página" type="number" (ngModelChange)="searchByPage(pageSearched)" [(ngModel)]="pageSearched"
+                     [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <button mat-flat-button (click)="searchByPage(pageSearched)">
+              <mat-icon>search</mat-icon>
+            </button>
+          </p>
+          <p>
+            <mat-checkbox class="example-margin" [(ngModel)]="letSearchByTema" (change)="searchByTopic(temasList[0].tema)" [disabled]="!enableByTema"></mat-checkbox>
+            <mat-form-field>
+              <mat-label>Busca por Tema</mat-label>
+              <mat-select [disabled]="!enableByTema" [(value)]="topicSelected" (selectionChange)="searchByTopic($event.value)">
+                <mat-option *ngFor="let tema of temasList" [value]="tema.tema">
+                  {{tema.tema}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-checkbox class="example-margin" [(ngModel)]="letSearchByTipo" (change)="searchByTipo(tiposAudio[0].id)"></mat-checkbox>
+            <mat-form-field>
+              <mat-label>Busca por Tipo de Audio</mat-label>
+              <mat-select [(value)]="tipoSelected" (selectionChange)="searchByTipo($event.value)">
+                <mat-option *ngFor="let tipo of tiposAudio" [value]="tipo.id">
+                  {{tipo.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+
+          <br><br/>
+
+      </div>
+
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="3" class="media-player-fonoteca">
+      <mat-grid-tile-header>Detalles de Audios</mat-grid-tile-header>
+      <div>
+        <div class="media-player">
+          <mat-advanced-audio-player [fxFlex.gt-sm]="100" [fxFlex.gt-lg]="200" [playlist]="msaapPlaylist"
+                                     [displayTitle]="msaapDisplayTitle" size="6"
+                                     [pageSizeOptions]="msaapPageSizeOptions"
+                                     [displayPlaylist]="msaapDisplayPlayList"
+                                     [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true">
+          </mat-advanced-audio-player>
+        </div>
+
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

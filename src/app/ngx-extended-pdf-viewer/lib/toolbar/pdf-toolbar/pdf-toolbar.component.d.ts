@@ -1,0 +1,25 @@
+import { OnInit, TemplateRef, EventEmitter } from '@angular/core';
+export declare class PdfToolbarComponent implements OnInit {
+    customToolbar: TemplateRef<any>;
+    mobileFriendlyZoomScale: number;
+    primaryMenuVisible: boolean;
+    showBookmarkButton: boolean;
+    showDownloadButton: boolean;
+    showFindButton: boolean | undefined;
+    showHandToolButton: boolean;
+    showOpenFileButton: boolean;
+    showPrintButton: boolean;
+    showPagingButtons: boolean;
+    showPresentationModeButton: boolean;
+    showRotateButton: boolean;
+    showSecondaryToolbarButton: boolean;
+    showSidebarButton: boolean;
+    showZoomButtons: boolean;
+    textLayer: boolean | undefined;
+    toolbarPaddingTop: string;
+    toolbarWidth: string;
+    zoomChange: EventEmitter<string | number>;
+    constructor();
+    ngOnInit(): void;
+    emitZoomChange(value: string | number): void;
+}

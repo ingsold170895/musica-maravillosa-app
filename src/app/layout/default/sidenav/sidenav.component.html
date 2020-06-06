@@ -1,0 +1,38 @@
+<mat-nav-list>
+    <span class="image-logo" fxLayout="column">
+        <img src="assets/images/logo-light.png"/>
+    </span>
+
+  <mat-divider></mat-divider>
+  <ul>
+    <li>
+      <button mat-button [routerLink]="['/music/home/']" routerLinkActive="active-list-item">
+        Mis Libros
+      </button>
+    </li>
+
+    <li *ngIf="showAdminOptions" >
+      <button mat-button [routerLink]="['/music/classrooms/']" routerLinkActive="active-list-item">
+        Mis Clases
+      </button>
+    </li>
+
+    <li *ngIf="!showAdminOptions" >
+      <button mat-button [routerLink]="['/music/myClassroom/']" routerLinkActive="active-list-item">
+        Mi Clase
+      </button>
+    </li>
+
+    <li>
+      <button mat-button [routerLink]="['/music/account/']" routerLinkActive="active-list-item">
+        Mi Cuenta
+      </button>
+    </li>
+    <li >
+      <button mat-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Salir
+      </button>
+    </li>
+  </ul>
+</mat-nav-list>

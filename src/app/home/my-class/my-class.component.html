@@ -1,0 +1,113 @@
+<h1 class="mat-display-1">Mi Aula</h1>
+<div class="fix-logo">
+  <img src="assets/images/logo-light.png">
+</div>
+<div class="fix-children-image">
+  <img src="assets/images/main-slider-child-2-min.png">
+</div>
+<div class="fix-background">
+  <img src="assets/images/page-background.jpg">
+</div>
+<div class="container">
+  <div *ngIf="!isAulaRegister">
+    <div class="text-primary">Registrarse en un Aula</div>
+    <form [formGroup]="claveAccesoForm">
+      <p>
+        <mat-form-field>
+          <input formControlName="claveAcceso" type="text" matInput placeholder="Clave de Acceso al Aula"/>
+        </mat-form-field>
+      </p>
+
+        <button id="button-login" mat-button type="button" [disabled]="!claveAccesoForm.valid" (click)="registerAula()"
+                [class.spinner]="loading" color="primary">
+          <span *ngIf="!loading">{{textButton}}</span></button>
+        <div *ngIf="errorRegistro" class="mat-error">{{errorRegistro}}</div>
+    </form>
+  </div>
+  <div *ngIf="isRegisterSuccess">
+    <div class="card-subtitle">Te registraste con éxito</div>
+    <mat-icon style="font-size: 6rem; color: green">check_circle_outline</mat-icon>
+  </div>
+  <div *ngIf="isAulaRegister">
+
+    <div *ngIf="teacher">
+      <mat-label class="label-profesor">Profesor</mat-label>
+      <p class="label-profesor-name">{{teacher.nombre}}</p>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-label class="label-mis-tareas">Mis Tareas</mat-label>
+    <div class="student-details">
+      <div *ngIf="studentTareasDataSource">
+        <table mat-table [dataSource]="studentTareasDataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef> Fecha</th>
+            <td mat-cell *matCellDef="let element"> {{element.fecha | date}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="libro">
+            <th mat-header-cell *matHeaderCellDef>Libro</th>
+            <td mat-cell *matCellDef="let element"> {{element.libro}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tema">
+            <th mat-header-cell *matHeaderCellDef>Tema</th>
+            <td mat-cell *matCellDef="let element"> {{element.tema}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="pagina">
+            <th mat-header-cell *matHeaderCellDef>Pagina</th>
+            <td mat-cell *matCellDef="let element"> {{element.pagina}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoEjercicioNombre">
+            <th mat-header-cell *matHeaderCellDef>Tipo de Ejercicio</th>
+            <td mat-cell *matCellDef="let element"> {{element.tipoEjercicioNombre}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="puntajeTotal">
+            <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+            <td mat-cell *matCellDef="let element"> {{element.puntajeTotal}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedTareasColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedTareasColumns;" (click)="tareaSelected(row)"></tr>
+        </table>
+      </div>
+    </div>
+   <!-- <div class="fix button-delete-classroom">
+      <button class="btn btn-dark">Eliminar Aula</button>
+    </div>
+    -->
+  </div>
+</div>
+
+
+<app-modal-password id="idRespuestasModalStudent" class="h-100 align-items-center" [marginSpace]="'20%'">
+  <mat-card *ngIf="tareaDetailDataSource" class="align-items-center">
+    <table mat-table [dataSource]="tareaDetailDataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="nroRespuesta">
+        <th mat-header-cell *matHeaderCellDef>N° Respuesta</th>
+        <td mat-cell *matCellDef="let element"> {{element.nroRespuesta}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ejercicioOpcionPreguntaEnunciado">
+        <th mat-header-cell *matHeaderCellDef>Pregunta</th>
+        <td mat-cell *matCellDef="let element"> {{element.ejercicioOpcionPreguntaEnunciado}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="respuesta">
+        <th mat-header-cell *matHeaderCellDef>Respuesta Entregada</th>
+        <td mat-cell *matCellDef="let element"> {{element.respuesta}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="puntaje">
+        <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+        <td mat-cell *matCellDef="let element"> {{element.puntaje}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedrespuestasColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedrespuestasColumns;"></tr>
+    </table>
+  </mat-card>
+</app-modal-password>

@@ -1,0 +1,33 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="image-logo">
+        <img src="assets/images/logo-light.png" >
+    </span>
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <ul fxLayout="row" fxLayoutGap="25px">
+        <li *ngIf="showAdminOptions">
+          <button mat-button>
+            Mis Clases
+          </button>
+        </li>
+        <li>
+          <button mat-button [routerLink]="['/music/home/']">
+            Mis Libros
+          </button>
+        </li>
+        <li>
+          <button mat-button>
+            Mi Cuenta
+          </button>
+        </li>
+        <li>
+          <button mat-button (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon> Salir
+          </button>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+

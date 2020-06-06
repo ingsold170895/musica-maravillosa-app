@@ -1,0 +1,75 @@
+<h1 class="mat-display-1">Mi Cuenta</h1>
+<div class="fix">
+  <img src="assets/images/logo-light.png">
+</div>
+<div class="fix-children-image">
+  <img src="assets/images/main-slider-child-1-min.png">
+</div>
+<div class="container">
+  <div class="data-content  container-back">
+    <h3 class="mat-title">Mis Datos</h3>
+    <div class="data-with-container">
+      <div class="data">
+        <div class="row">
+          <div class="col-6 col-md-4"><p>
+            <label>Nombre: </label>
+          </p>
+          </div>
+          <div class="col-12 col-md-8">{{user.nombre}}</div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-md-4">
+            <p>
+              <label>Correo:</label>
+            </p>
+          </div>
+          <div class="col-12 col-md-8">{{user.correo}}</div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-md-4">
+            <p>
+              <label>Tipo de Usuario:</label>
+            </p>
+          </div>
+          <div class="col-12 col-md-8">{{profile}}</div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+  <mat-divider></mat-divider>
+</div>
+<div class="container">
+  <div class="password-content">
+    <h3 class="mat-title">Cambiar mi Contraseña</h3>
+
+    <div class="alert-success" *ngIf="isSuccess">La clave se actualizó con éxito</div>
+    <div class="alert-danger" *ngIf="isError">No se pudo actualizar la clave</div>
+    <form [formGroup]="newPasswordForm">
+      <p>
+        <mat-form-field>
+          <input type="password" formControlName="currentPassword" matInput placeholder="Contraseña Actual"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" formControlName="newPassword" matInput placeholder="Nueva Contraseña"/>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" formControlName="confirmPassword" matInput placeholder="Confirmar nueva Contraseña"/>
+        </mat-form-field>
+      </p>
+      <div class="button-save">
+        <button [disabled]="!newPasswordForm.valid" class="btn btn-primary" mat-flat-button color="primary"
+                (click)="changePassword()">Guardar
+        </button>
+      </div>
+    </form>
+    <br>
+  </div>
+</div>
+

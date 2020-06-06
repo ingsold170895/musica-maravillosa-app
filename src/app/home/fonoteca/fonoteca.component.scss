@@ -1,0 +1,43 @@
+.mat-display-1 {
+  height: 4rem;
+  background: #f6f6f6;
+  margin-bottom: 0;
+  padding-top: 5px;
+}
+
+.table-track-list{
+  width: 65vh;
+  overflow: auto;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+table{
+  width: 100%;
+}
+
+.media-player-fonoteca {
+  top: 3rem;
+}
+mat-grid-tile-header{
+  text-align: center;
+}
+
+mat-grid-tile{
+  display: block;
+}
+
+.form-search{
+  width: 100%;
+  padding-left: 50px;
+  mat-checkbox {
+    padding-right: 20px;
+  }
+}
+
+.media-player{
+  width: 98%;
+  padding-top: 35px;
+  padding-left: 50px;
+}
+

@@ -1,0 +1,80 @@
+<div class="image-background">
+
+</div>
+<div class="version-number">
+  {{version_app}}
+</div>
+<div class="h-100 align-items-center">
+  <mat-card style="height: 40vh">
+    <mat-card-content>
+      <div class="image-login">
+      <img class="align-self-center" src="assets/images/logo.png">
+      </div>
+      <div>
+        <mat-card-title>Login</mat-card-title>
+        <form [formGroup]="loginForm">
+          <p>
+            <mat-form-field>
+              <input formControlName="username" type="text" matInput placeholder="Email"/>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input formControlName="password" type="password" matInput placeholder="Contraseña"/>
+            </mat-form-field>
+          </p>
+          <button id="button-login" type="button" [disabled]="!loginForm.valid" (click)="onSubmit()" [class.spinner]="loading" mat-raised-button color="primary">
+            <span *ngIf="!loading">{{textButton}}</span></button>
+          <br/>
+          <a *ngIf="!loading" style="padding-top: 4px; text-align: center; font-size: 10px;text-transform: capitalize;" (click)="openResetPasswordModal()">
+            Olvide mi Contraseña</a>
+
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+          <div *ngIf="resetSuccess" class="alert alert-success mt-3 mb-0" style="color: green">{{resetSuccess}}</div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+<app-modal-password id="resetPasswordModal">
+  <form [formGroup]="resetPasswordForm">
+    <p>
+      <mat-form-field>
+        <input formControlName="correoReset" type="text" matInput placeholder="Ingresa el correo de tu Cuenta"/>
+      </mat-form-field>
+    </p>
+    <button id="button-reset-password" type="button" [disabled]="!resetPasswordForm.valid" (click)="requestResetPassword()"
+            [class.spinner]="loadingReset" mat-raised-button color="primary">
+      <span *ngIf="!loadingReset">{{textResetPasswordButton}}</span></button>
+    <div *ngIf="errorReset" class="alert alert-danger mt-3 mb-0">{{errorReset}}</div>
+  </form>
+</app-modal-password>
+
+<app-modal-password id="1">
+  <div class="h-100 align-items-center">
+    <mat-card style="height: 40vh">
+      <mat-card-content>
+        <div>
+          <mat-card-title>Actualiza tu Contraseña</mat-card-title>
+          <form [formGroup]="confirmPasswordForm">
+            <p>
+              <mat-form-field>
+                <input formControlName="password" type="password" matInput placeholder="Nueva Contraseña"/>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field>
+                <input formControlName="confirmPassword" type="password" matInput placeholder="Confirma tu Contraseña"/>
+              </mat-form-field>
+            </p>
+            <button id="button-confirm-password" type="button" [disabled]="!confirmPasswordForm.valid" (click)="updatePassword()"
+                    [class.spinner]="loadingPassword" mat-raised-button color="primary">
+              <span *ngIf="!loadingPassword">{{textPasswordButton}}</span></button>
+            <div *ngIf="errorPassword" class="alert alert-danger mt-3 mb-0">{{errorPassword}}</div>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</app-modal-password>

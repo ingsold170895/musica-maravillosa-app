@@ -1,0 +1,32 @@
+<div class="my-3">
+  <mat-card class="card-book">
+    <mat-card-title>
+      <mat-card-title>{{bookCard.title}}</mat-card-title>
+      <mat-card-subtitle>{{bookCard.by}} </mat-card-subtitle>
+    </mat-card-title>
+    <mat-card-content>
+      <div class="row">
+        <div class="image-portada text-center col-8" *ngIf="!isLoading">
+          <img  src="{{bookCard.urlImage}}" (click)="openBook()">
+        </div>
+        <div class="image-portada text-center col-8" *ngIf="isLoading">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+        <div class="col-4">
+          <h4></h4>
+          <p>{{bookCard.description}}</p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="row">
+        <div class="col text-center button-card" *ngIf=bookCard.showGuide>
+          <a (click)="openGuide()">GUÍA</a>
+        </div>
+        <div class="col text-center button-card" *ngIf=bookCard.showFonoteca>
+          <a (click)="openFonoteca()"> FONOTECA </a>
+        </div>
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

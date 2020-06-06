@@ -1,0 +1,21 @@
+<h1>MEDIA PALYER</h1>
+<mat-card>
+  <div ng-controller="MyController">
+    <audio media-player="audio1" data-playlist="playlist1">
+      <source src="http://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" type="audio/ogg">
+    </audio>
+    <span ng-show="audio1.playing">Player status: Playing</span>
+    <span ng-show="!audio1.playing">Player status: Paused</span>
+  </div>
+</mat-card>
+
+<div *ngFor="let idPerfil of activeList">
+  <img src="http://graph.facebook.com/{{idPerfil}}/picture?type=square">
+</div>
+
+<div *ngIf="visitors">
+  <div *ngFor="let visitor of visitors">
+    <img src="http://graph.facebook.com/{{visitor}}/picture?type=square">
+  </div>
+</div>
+

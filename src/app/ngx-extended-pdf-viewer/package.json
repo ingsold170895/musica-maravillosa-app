@@ -1,0 +1,73 @@
+{
+  "_from": "ngx-extended-pdf-viewer",
+  "_id": "ngx-extended-pdf-viewer@3.2.6",
+  "_inBundle": false,
+  "_integrity": "sha512-KXzmt4ckpshPQnkC+dlLpm6ogPGp263LnekzCQQD8j0qXQQprduyDtkbp8Zq8whBV67xpWlJMo4k0rccLRx1CQ==",
+  "_location": "/ngx-extended-pdf-viewer",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ngx-extended-pdf-viewer",
+    "name": "ngx-extended-pdf-viewer",
+    "escapedName": "ngx-extended-pdf-viewer",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ngx-extended-pdf-viewer/-/ngx-extended-pdf-viewer-3.2.6.tgz",
+  "_shasum": "0c055a1be87e0ddb2fb0a599ad4d7e4dcd86a6d9",
+  "_spec": "ngx-extended-pdf-viewer",
+  "_where": "C:\\Users\\INGSOLD\\Musica Maravillosa\\ElectronMusica\\electron-angular-musica-m",
+  "author": {
+    "name": "Stephan Rauh",
+    "url": "https://www.beyondjava.net"
+  },
+  "bugs": {
+    "url": "https://github.com/stephanrauh/ngx-extended-pdf-viewer/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "lodash.deburr": "^4.1.0",
+    "tslib": "^1.9.0"
+  },
+  "deprecated": false,
+  "description": "Embedding PDF files in your Angular application. Highly configurable viewer including the toolbar, sidebar, and all the features you're used to.",
+  "es2015": "fesm2015/ngx-extended-pdf-viewer.js",
+  "esm2015": "esm2015/ngx-extended-pdf-viewer.js",
+  "esm5": "esm5/ngx-extended-pdf-viewer.js",
+  "fesm2015": "fesm2015/ngx-extended-pdf-viewer.js",
+  "fesm5": "fesm5/ngx-extended-pdf-viewer.js",
+  "homepage": "https://pdfviewer.net",
+  "keywords": [
+    "PDF",
+    "pdfjs",
+    "PDF viewer",
+    "Angular",
+    "ng2",
+    "Angular 6",
+    "Angular 7",
+    "Angular 8",
+    "Angular 9",
+    "customizable PDF viewer"
+  ],
+  "license": "Apache-2.0",
+  "main": "bundles/ngx-extended-pdf-viewer.umd.js",
+  "metadata": "ngx-extended-pdf-viewer.metadata.json",
+  "module": "fesm5/ngx-extended-pdf-viewer.js",
+  "name": "ngx-extended-pdf-viewer",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0 || ^7.0.0 || ^7.1.0 || ^7.2.0 || ^7.3.0 || ^8.0.0 || ^8.1.0 || ^8.2.0 || ^8.3.0 || ^9.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0 || ^7.0.0 || ^7.1.0 || ^7.2.0 || ^7.3.0 || ^8.0.0 || ^8.1.0 || ^8.2.0|| ^8.3.0 || ^9.0.0"
+  },
+  "repository": {
+    "url": "git+https://github.com/stephanrauh/ngx-extended-pdf-viewer.git"
+  },
+  "sideEffects": false,
+  "typings": "ngx-extended-pdf-viewer.d.ts",
+  "version": "3.2.6"
+}

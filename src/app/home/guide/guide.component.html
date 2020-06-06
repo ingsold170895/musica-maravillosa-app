@@ -1,0 +1,58 @@
+<!--<mat-grid-list cols="5">
+  <mat-grid-tile colspan="4">
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <form>
+      <mat-form-field>
+        <mat-label>Busca por Tema</mat-label>
+        <mat-select [(value)]="topicSelected" (selectionChange)="searchByTopic($event.value)">
+          <mat-option *ngFor="let tema of temas" [value]="tema.pagina">
+            {{tema.tema}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-grid-tile>
+</mat-grid-list>
+-->
+<ngx-extended-pdf-viewer
+  [src]="sourcePDF"
+  [height]="'85vh'"
+  [customToolbar]="myCustomButtons"
+  [useBrowserLocale]="true"
+  [page]="pageNumber"
+  [showHandToolButton]="false"
+  [contextMenuAllowed]="false"
+  [showDownloadButton]="false"
+  [showBookmarkButton]="false"
+  [showOpenFileButton]="true"
+  [showScrollingButton]="false"
+  [showPrintButton]="false"
+  useBrowserLocale="true"
+  [showBorders]="true"
+  [zoom]="'page-fit'"
+  [backgroundColor]="'#fafafa'"
+></ngx-extended-pdf-viewer>
+<ng-template #myCustomButtons>
+  <div id="toolbarViewer" style="background: #7d442d">
+    <div id="toolbarViewerLeft">
+    </div>
+    <div id="toolbarViewerRight">
+      <pdf-toggle-sidebar>
+
+      </pdf-toggle-sidebar>
+      <!--   <pdf-print [hidden]="!enablePrintPage" (click)="printCurrentPage()"></pdf-print>
+      <button mat-button [hidden]="!enablePrintPage" (click)="printCurrentPage()">
+        <mat-icon>print</mat-icon>
+      </button>
+      <button mat-button (click)="openDetailsModal()">
+        <mat-icon>info</mat-icon>
+      </button>
+      -->
+    </div>
+    <div class="text-center">
+      <pdf-paging-area></pdf-paging-area>
+    </div>
+  </div>
+</ng-template>

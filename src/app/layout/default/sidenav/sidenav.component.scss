@@ -1,0 +1,36 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+img {
+  width: 100%;
+}
+
+mat-divider {
+  background-color: white;
+}
+
+mat-nav-list {
+  color: white;
+}
+
+.mat-nav-list a, h2.mat-subheader {
+  color: white;
+}
+
+.image-logo{
+  height: 40px;
+}
+
+.image-logo img{
+  width: auto;
+  max-height: 100%;
+  display: block;
+}
+
+ul li{
+   list-style: none;
+}
+
+.active-list-item {
+  color: mat-color($candy-app-accent);
+}

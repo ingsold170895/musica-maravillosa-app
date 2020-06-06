@@ -1,0 +1,13 @@
+<!-- <app-sidebar></app-sidebar> -->
+
+<mat-drawer-container >
+  <mat-drawer id="drawer" #drawer [mode]="'over'" class="navMatDrawer" (closed)="sideBarClosed()">
+      <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="fix">
+      <img src="assets/images/logo.png">
+    </div>
+      <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

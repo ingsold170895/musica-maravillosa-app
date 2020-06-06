@@ -1,0 +1,225 @@
+<mat-grid-list cols="5" rowHeight="13.6vh">
+  <mat-grid-tile
+    [colspan]="4"
+    [rowspan]="7">
+    <div style="width: 100%; margin-top: 30px;" id="PDF">
+      <ngx-extended-pdf-viewer
+        [src]="sourcePDF"
+        [height]="'100vh'"
+        [customToolbar]="myCustomButtons"
+        [useBrowserLocale]="true"
+        [showHandToolButton]="false"
+        [contextMenuAllowed]="false"
+        [showDownloadButton]="false"
+        [showBookmarkButton]="false"
+        [showOpenFileButton]="true"
+        [showScrollingButton]="false"
+        [showPrintButton]="false"
+        useBrowserLocale="true"
+        [showBorders]="true"
+        [zoom]="'page-fit'"
+        (pageChange)="pageChanged($event)"
+        (pdfLoaded)="closeLoadingModal()"
+        [backgroundColor]="'#fafafa'"
+      ></ngx-extended-pdf-viewer>
+      <ng-template #myCustomButtons>
+        <div id="toolbarViewer" style="background: #7d442d">
+          <div id="toolbarViewerLeft">
+            <pdf-page-number></pdf-page-number>
+          </div>
+          <div id="toolbarViewerRight">
+            <!--   <pdf-print [hidden]="!enablePrintPage" (click)="printCurrentPage()"></pdf-print> -->
+            <button mat-button [hidden]="!enablePrintPage" id="printCurrentPageButton" (click)="printCurrentPage()">
+              <mat-icon>print</mat-icon>
+            </button>
+            <button mat-button (click)="openDetailsModal()">
+              <mat-icon>info</mat-icon>
+            </button>
+          </div>
+          <div class="text-center">
+            <pdf-previous-page id="previous"></pdf-previous-page>
+            <pdf-next-page id="next"></pdf-next-page>
+          </div>
+        </div>
+      </ng-template>
+      <!--  <ng-template #myCustomButtonsWithoutPrint>
+          <div id="toolbarViewer" style="background: #7d442d">
+            <div id="toolbarViewerLeft">
+              <pdf-page-number></pdf-page-number>
+            </div>
+            <div id="toolbarViewerRight">
+              <button mat-button><mat-icon>info</mat-icon></button>
+            </div>
+            <div class="text-center">
+              <pdf-previous-page id="previous"></pdf-previous-page>
+              <pdf-next-page id="next"></pdf-next-page>
+            </div>
+          </div>
+        </ng-template> -->
+    </div>
+
+  </mat-grid-tile>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="5">
+    <div id="audio-player" class="col">
+      <mat-advanced-audio-player [fxFlex.gt-sm]="100" [playlist]="msaapPlaylist" [displayTitle]="false"
+                                 [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
+                                 size="4"
+                                 [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"
+                                 (loadeddata)="setSizes()"></mat-advanced-audio-player>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1" class="buttons-box">
+    <div [ngClass]="{'buttons': true, 'button-playing': isPlayingNarrador}">
+      <button mat-button [disabled]="!enableNarrador" (click)="cargarNarradores()"
+              matTooltip="Narrador">
+        <mat-icon class="hi-icon">record_voice_over</mat-icon>
+      </button>
+    </div>
+    <div [ngClass]="{'buttons': true}">
+      <button mat-button [disabled]="!enableCanciones" (click)="cargarCanciones()"
+              matTooltip="Canciones">
+        <mat-icon>library_music</mat-icon>
+      </button>
+    </div>
+    <div [ngClass]="{'buttons': true}">
+      <button mat-button [disabled]="!enableKaraoke" (click)="cargarKaraokes()"
+              matTooltip="Karaoke">
+        <mat-icon>mic</mat-icon>
+      </button>
+    </div>
+    <div [ngClass]="{'buttons': true}">
+      <button mat-button [disabled]="!enableReconocimientoAuditivo" (click)="cargarAudios()"
+              matTooltip="Reconocimiento Auditivo">
+        <mat-icon>hearing</mat-icon>
+      </button>
+    </div>
+
+  </mat-grid-tile>
+  <mat-grid-tile
+    [colspan]="1"
+    [rowspan]="1">
+    <div class="buttons">
+      <button mat-button [disabled]="!enableEjercicioOpcionPage" (click)="openModalEjercicioOpcion()"
+              matTooltip="Ejercicio">
+        <mat-icon>create</mat-icon>
+      </button>
+    </div>
+    <div class="buttons">
+      <button mat-button [disabled]="!enableVideoPage"
+              matTooltip="Animación">
+        <mat-icon>movie</mat-icon>
+      </button>
+    </div>
+
+    <div class="buttons">
+      <button mat-button [disabled]="!enablePrintPentagrama"
+              matTooltip="Imprimir Pentagrama" (click)="showPentagrama()">
+        <mat-icon>view_headline</mat-icon>
+      </button>
+    </div>
+    <div class="buttons">
+      <button mat-button [disabled]="!enableEjercicioItercativoPAge"
+              matTooltip="Juego Iteractivo">
+        <mat-icon>videogame_asset</mat-icon>
+      </button>
+    </div>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
+
+<app-modal-password id="{{idModalEjercicios}}">
+  <div class="h-100 align-items-center">
+    <mat-card *ngIf="currentEjercicioOpcion">
+      <mat-card-header>
+        <mat-card-title>
+          {{currentEjercicioOpcion.instruccion}}
+          <p *ngIf="isCurrentEjercicioOpcionResuelto" style="color: #d8b828">Ya has resuelto este ejercicio.</p>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="questionsForm">
+          <div *ngFor="let pregunta of currentEjercicioPreguntas">
+            <mat-card style="padding: 10px">
+              <mat-card-header>{{pregunta.pregunta}}</mat-card-header>
+              <mat-card-content>
+                <mat-radio-group aria-label="Select an option" formControlName="{{pregunta.id}}"
+                                 id="radioGroup{{pregunta.id}}" name="radioGroup{{pregunta.id}}"
+                                 *ngFor="let respuesta of pregunta.respuestas; let i = index;">
+                  <mat-radio-button
+                    [value]="respuesta"
+                    name="radioButton{{respuesta.id}}_{{i}}"
+                    id="radioButton{{respuesta.id}}_{{i}}"
+                    style="padding: 20px">
+                    {{respuesta.respuesta}}
+                  </mat-radio-button>
+                </mat-radio-group>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="button-send-Ejercicio">
+            <button type="button" mat-button color="primary" disabled="{{isCurrentEjercicioOpcionResuelto || !questionsForm.valid}}" (click)="sendRespuestas()">Enviar</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</app-modal-password>
+
+<app-modal-password id="{{idModalLoading}}">
+  <mat-card>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card>
+</app-modal-password>
+
+<app-modal-password id="{{idModalResultado}}">
+  <mat-card class="modal-resultado">
+    <h4>Tu resultado se guardó con éxito</h4>
+    <mat-icon style="font-size: 6rem;">check_circle_outline</mat-icon>
+    <p><span>Acertaste: {{resultadoEjercicioPreguntas}}%</span></p>
+  </mat-card>
+</app-modal-password>
+
+<app-modal-password id="{{idModalDetails}}">
+  <div style="text-align: center">
+    <mat-card style="width: 40vh">
+      <mat-card-header>Detalles del Libro</mat-card-header>
+      <mat-card-content>
+        <div>
+          <div style="font-weight: bold;">Autor:</div>
+          {{libroService.currentBook.autor}} </div>
+        <div>
+          <div style="font-weight: bold;">Dirección y Coordinación:</div>
+          {{libroService.currentBook.autor}} </div>
+      </mat-card-content>
+      <mat-card-footer>
+        <mat-icon>book</mat-icon>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</app-modal-password>
+
+<div id="printPentagrama" class="align-items-center" [class.printPentagrama]="!isPrintPentagramaOpen">
+  <div style="position: fixed;
+    top: 0;
+    right: 30px;
+    z-index: 2000;}">
+    <button id="button-print-pentagrama" class="btn btn-dark" (click)="printPentagrama()">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button class="btn btn-dark" (click)="isPrintPentagramaOpen = false;" >Cancelar</button>
+  </div>
+  <div class="divPrintPentagrama" id="divPrintPentagrama">
+    <h1 style="margin: auto">{{tituloPentagrama}}</h1>
+    <img id="imageToPrint" src="{{sourcePentagramaImprimir}}" style="
+    height: 80%;
+    width: auto;
+    margin: auto;
+    display: block;">
+  </div>
+</div>
+<div [class.jw-modal-background]="isPrintPentagramaOpen"></div>

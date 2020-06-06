@@ -1,0 +1,23 @@
+<h1 class="mat-display-2">Mis Libros</h1>
+<div class="container">
+  <!--
+  <div class="alert alert-success" role="alert" *ngIf="librosCargados">Libros Cargados</div>
+  <div class="alert alert-warning" role="alert" *ngIf="errorCargarLibroContenidos">No se cargaron los contenidos de los libros</div>
+  <div class="alert alert-warning" role="alert" *ngIf="errorCargarLibroAudios">No se cargaron los Audios de los libros</div>
+ -->
+  <div class="align-content-center">
+    <div class="text-center col-8" *ngIf="loadingData">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div *ngFor="let bookCard of booksCards">
+      <app-book [bookCard]="bookCard"></app-book>
+    </div>
+  </div>
+  <div class="fix mat-footer-cell align-content-end" ><button mat-flat-button color="primary" (click)="recargarContenidos()"><mat-icon>refresh</mat-icon></button></div>
+</div>
+
+<div class="background-loading" *ngIf="!allDataLoaded">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+

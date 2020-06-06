@@ -1,0 +1,57 @@
+<h1 class="mat-display-1">Mis Aulas</h1>
+<div class="container">
+  <div>Añadir</div>
+  <button mat-icon-button (click)="openModalCreateClassroom()">
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+
+  <div class="cardList">
+    <ng-container *ngFor="let classroom of classroomsList">
+      <app-class-card [aula]="classroom" (openConfirmationDialog)="openConfirmationDialog(classroom)"></app-class-card>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-password id="idModalCreateClassroom" class="h-100 align-items-center" [marginSpace]="'25%'">
+  <div class="container">
+    <mat-card class="card-create-classroom">
+      <mat-card-header>Nueva Aula</mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="aulaForm">
+          <p>
+            <mat-form-field>
+              <input formControlName="colegio" type="text" matInput placeholder="Colegio"/>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input formControlName="nombreClase" type="text" matInput placeholder="Nombre del Aula"/>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <mat-label>Estudiantes</mat-label>
+              <textarea class="text-area-estudiantes" matInput formControlName="estudiantes"></textarea>
+            </mat-form-field>
+          </p>
+          <button id="button-confirm-delete" class="btn btn-dark" mat-raised-button type="button" [disabled]="!aulaForm.valid" (click)="crearAula()"
+                  [class.spinner]="loadingCreate"  color="primary">
+            <span *ngIf="!loadingCreate">{{textCreateButton}}</span></button>
+          <div *ngIf="errorCreate" class="alert alert-danger mt-3 mb-0">{{errorCreate}}</div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</app-modal-password>
+
+<app-modal-password id="idConfirmationDialog" class="h-100 align-items-center" [marginSpace]="'30%'" [opacity]="0" [marginTop]="'20vh'">
+  <div class="align-items-center shadow">
+    <mat-label>¿Seguro desea eliminar el Aula?</mat-label>
+    <br>
+    <form>
+      <button mat-button class="btn btn-primary" (click)="deleteAula()">Si</button>
+      <button mat-button class="btn btn-danger" (click)="closeModalConfirmation()">Cancelar</button>
+    </form>
+  </div>
+</app-modal-password>
+

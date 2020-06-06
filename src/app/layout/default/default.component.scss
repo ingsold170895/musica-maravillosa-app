@@ -1,0 +1,32 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.fix img{
+  position:fixed;
+  top:15px;
+  right:0;
+  width: 16vw;
+}
+
+mat-drawer-content {
+  background-color: white;
+  height: 97.3vh;
+}
+
+.navMatDrawer {
+  background-color: mat-color($candy-app-primary);
+}
+
+.toolbar {
+  position: absolute;
+   left: 0px;
+  z-index: 7;
+  cursor: default;
+}
+

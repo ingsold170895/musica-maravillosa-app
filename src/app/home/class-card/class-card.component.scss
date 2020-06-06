@@ -1,0 +1,36 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+mat-card-footer {
+  height: 25px;
+  background-color: mat-color($candy-app-accent);
+}
+
+mat-card {
+  width: 30vw;
+}
+
+.mat-card-title {
+  width: 100%;
+
+  button {
+    vertical-align: top;
+    float: right;
+
+    mat-icon {
+      vertical-align: top;
+      z-index: 999;
+    }
+
+    &:hover {
+      color: mat-color($candy-app-accent)
+    }
+  }
+}
+
+.clave-acceso {
+  color: white;
+  text-align: center;
+  padding: 3px;
+}
+

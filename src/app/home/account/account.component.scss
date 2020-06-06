@@ -1,0 +1,92 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
+.card-box-style {
+
+  background-color: #f9f9f9;
+  border-radius: 15px;
+
+}
+.container{
+  max-width: 100vw;
+}
+
+@media (min-width: 992px){
+  .container {
+    max-width: 100vw;
+  }
+}
+
+
+.container-back{
+  background-image: url('src/assets/images/main-slider-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75vh;
+  top: 4rem;
+  max-width: 100vw;
+  font-size: 19px;
+}
+
+.mat-display-1 {
+  height: 5rem;
+  background: mat-color($candy-app-primary);
+  margin-bottom: 0;
+  padding: 15px;
+  color: white;
+}
+
+.data-content {
+  padding: 10% 5% 5%;
+}
+
+.data {
+  padding-left: 20px;
+}
+
+ul li{
+  list-style: none;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.password-content {
+  padding: 2% 5% 5%;
+  width: 50%;
+}
+
+form {
+  width: 100%;
+  padding: 15px;
+}
+
+mat-grid-list {
+  background-color: #f2f2f2;
+}
+
+.button-save{
+  button {
+    background-color: mat-color($candy-app-primary);
+    border-color: mat-color($candy-app-primary);
+  }
+}
+
+.fix img {
+  position: fixed;
+  top: 15px;
+  right: 0;
+  width: 16vw;
+}
+
+.fix-children-image img{
+  position: fixed;
+  top: 34vh;
+  right: 5rem;
+  width: 46vw;
+}
+
+.data-with-container {
+  width: 50vw;
+}
