@@ -16,6 +16,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() opacity: number;
   @Input() marginTop: any;
   @Input() heigthBody: any;
+  @Input() backgroundBody: any;
 
   private element: any;
 

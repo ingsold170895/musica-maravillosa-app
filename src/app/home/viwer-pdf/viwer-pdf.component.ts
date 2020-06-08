@@ -23,6 +23,7 @@ import {DatePipe} from "@angular/common";
 import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
 import {TareaEjercicioOprecionRespuesta} from "@app/_models/TareaEjercicioOprecionRespuesta";
 import * as printJS from 'print-js'
+import {sha256} from "js-sha256";
 
 
 declare function prepareButtonPrintPentagrama(): any;
@@ -136,7 +137,11 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.thereIsAudio = false;
-    const pathPdf = './../assets/PDF/libros/' + this.libroService.currentBook.titulo + '.pdf';
+    //convert titulo con sha256
+    let titulo = this.libroService.currentBook.titulo;
+    let tituloSha256 = sha256(titulo);
+    console.log(tituloSha256);
+    const pathPdf = './../assets/pen5/li6/' + tituloSha256;
     this.sourcePDF = pathPdf.toString();
     this.enableHomeworks = this.libroService.currentAccess
       .filter(access => access.libroId = this.libroService.currentBook.id)[0].cuadernoTrabajo;

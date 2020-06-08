@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/_services';
 import {first, timeout} from 'rxjs/operators';
 import {ModalService} from '@app/_modals';
 import {LibroService} from "@app/_services/libro.service";
+import {IpcService} from "@app/_services/ipc.service";
 
 declare const DataComputer: any;
 declare const version_app: any;
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
   errorReset = '';
   resetSuccess: string;
   version_app = '';
+  updateAvailable = '';
+  errorUpdate = '';
+  downloadProgress: any;
 
 
   constructor(
@@ -42,8 +46,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private modalService: ModalService,
-    private libroService: LibroService
+    private libroService: LibroService,
+    private ipcService: IpcService,
+    private zone: NgZone
   ) {
+
+
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
@@ -54,6 +62,28 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    //CHECKING FOR UPDATES
+    this.ipcService.on("message", (event: Electron.IpcMessageEvent)=>{
+      console.log(event);
+    });
+    this.ipcService.on("update-available", (event: Electron.IpcMessageEvent)=>{
+      this.updateAvailable = "Actualizando a una nueva versión...";
+      console.log(this.updateAvailable);
+      this.modalService.open("update-available");
+    });
+    this.ipcService.on("error-update", (event: Electron.IpcMessageEvent)=>{
+      this.errorUpdate = "No se pudo actualizar la aplicación.";
+    });
+    this.ipcService.on("download-progress", (event: Electron.IpcMessageEvent, args: Electron.IpcMessageEvent)=>{
+     this.zone.run(()=>{
+       let progress = parseFloat(args.toString()).toFixed(2);
+       this.setProgressUpdate(progress);
+       console.log(progress);
+     });
+    });
+
+
+
     console.log(isUpdateReady);
     this.version_app = version_app;
     this.loginForm = this.formBuilder.group({
@@ -71,6 +101,20 @@ export class LoginComponent implements OnInit {
     }, {validator: this.checkPasswords});
     // get return url from route parameters or default to '/'
     this.returnUrl = '/music/home';
+  }
+
+  quitAndInstall(){
+    this.ipcService.send("quitAndInstall");
+  }
+
+  setProgressUpdate(progressPercent: string){
+    console.log("porgress: ",progressPercent);
+    this.downloadProgress = progressPercent;
+    this.updateAvailable = "Actualizando a una nueva versión: "+ this.downloadProgress +"%";
+  }
+
+  hiddenUpdateModal(){
+    this.modalService.close("update-available");
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
@@ -94,6 +138,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.downloadProgress){
+      this.errorPassword = "Actualización en curso";
+      return;
+    }
     this.textButton = '';
     this.submitted = true;
     this.loading = true;
@@ -162,6 +210,10 @@ export class LoginComponent implements OnInit {
 
 
   updatePassword() {
+    if(this.downloadProgress){
+      this.errorPassword = "Actualización en curso";
+      return;
+    }
     this.loadingPassword = !this.loadingPassword;
     this.textPasswordButton = '';
     this.authenticationService.updatePassword(this.confirmPasswordForm.controls.password.value)
@@ -187,6 +239,10 @@ export class LoginComponent implements OnInit {
   }
 
   requestResetPassword() {
+    if(this.downloadProgress){
+      this.errorPassword = "Actualización en curso";
+      return;
+    }
     this.loadingReset = !this.loadingPassword;
     this.textResetPasswordButton = '';
     this.authenticationService.requestResetPassword(this.resetPasswordForm.controls.correoReset.value).subscribe(response => {

@@ -4,6 +4,13 @@
 <div class="version-number">
   {{version_app}}
 </div>
+<div class="error-update" *ngIf="errorUpdate">
+  {{errorUpdate}}
+</div>
+<div class="update-available" *ngIf="updateAvailable">
+  {{updateAvailable}}
+</div>
+
 <div class="h-100 align-items-center">
   <mat-card style="height: 40vh">
     <mat-card-content>
@@ -35,6 +42,10 @@
       </div>
     </mat-card-content>
   </mat-card>
+  <div *ngIf="downloadProgress">
+    <mat-progress-bar mode="buffer" color="primary" [bufferValue]="downloadProgress"  *ngIf="downloadProgress"></mat-progress-bar>
+    <div style="text-align: center">Descargando Actualización: {{downloadProgress}} %</div>
+  </div>
 
 </div>
 <app-modal-password id="resetPasswordModal">
@@ -78,3 +89,10 @@
     </mat-card>
   </div>
 </app-modal-password>
+<app-modal-password id="update-available" [marginTop]="['30vh']" [heigthBody]="['4rem']" [marginSpace]="['30vw']" [backgroundBody]="['transparent']">
+   <mat-card>
+     <p>Hay una nueva versión disponible. Se instalará automáticamente</p>
+     <button mat-button  color="primary" (click)="hiddenUpdateModal()">Aceptar</button>
+   </mat-card>
+</app-modal-password>
+

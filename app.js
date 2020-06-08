@@ -31,7 +31,7 @@ function initWindow() {
       nodeIntegrationInSubFrames: true,
       enableRemoteModule: true,
       nodeIntegrationInWorker: true,
-      javascript: true,
+      javascript: true
     }
   });
 
@@ -46,6 +46,8 @@ function initWindow() {
       slashes: true
     })
   );
+
+  appWindow.removeMenu();
 
   /*
   workerWindow = new BrowserWindow({
@@ -148,25 +150,30 @@ autoUpdater.on('checking-for-update', () => {
 });
 autoUpdater.on('update-available', info => {
   sendStatusToWindow('Update available.');
+  if (appWindow) {
+    appWindow.webContents.send('update-available', 'update-available');
+  }
 });
 autoUpdater.on('update-not-available', info => {
   sendStatusToWindow('Update not available.');
 });
 autoUpdater.on('error', err => {
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+  if (appWindow) {
+    appWindow.webContents.send('error-update', 'error-update');
+  }
 });
 autoUpdater.on('download-progress', progressObj => {
   sendStatusToWindow(
     `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
   );
+  appWindow.webContents.send("download-progress",`${progressObj.percent}`);
 });
 autoUpdater.on('update-downloaded', info => {
   sendStatusToWindow('Update downloaded; will install now');
-});
-
-autoUpdater.on('update-downloaded', info => {
-  // Wait 5 seconds, then quit and install
-  // In your application, you don't need to wait 500 ms.
-  // You could call autoUpdater.quitAndInstall(); immediately
   autoUpdater.quitAndInstall();
 });
+
+
+
+
