@@ -115,6 +115,13 @@
     },
     "win": {
       "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "build/icon.icns"
     }
   }
 }
