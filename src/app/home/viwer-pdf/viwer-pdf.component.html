@@ -24,8 +24,8 @@
       ></ngx-extended-pdf-viewer>
       <ng-template #myCustomButtons>
         <div id="toolbarViewer" style="background: #7d442d">
-          <div id="toolbarViewerLeft">
-            <pdf-page-number></pdf-page-number>
+          <div id="toolbarViewerLeft" style="color: white; padding: 5px;">
+              {{tituloLibro}}
           </div>
           <div id="toolbarViewerRight">
             <!--   <pdf-print [hidden]="!enablePrintPage" (click)="printCurrentPage()"></pdf-print> -->
@@ -37,8 +37,10 @@
             </button>
           </div>
           <div class="text-center">
-            <pdf-previous-page id="previous"></pdf-previous-page>
-            <pdf-next-page id="next"></pdf-next-page>
+            <pdf-paging-area></pdf-paging-area>
+            <!--<pdf-previous-page id="previous"></pdf-previous-page>
+            <pdf-page-number></pdf-page-number>
+            <pdf-next-page id="next"></pdf-next-page>-->
           </div>
         </div>
       </ng-template>

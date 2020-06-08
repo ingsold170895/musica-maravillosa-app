@@ -49,6 +49,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   isPrintPentagramaOpen = false;
 
   sourcePDF: string;
+  tituloLibro: string;
 
   page: Pagina;
   narracionSource: string;
@@ -138,8 +139,8 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.thereIsAudio = false;
     //convert titulo con sha256
-    let titulo = this.libroService.currentBook.titulo;
-    let tituloSha256 = sha256(titulo);
+    this.tituloLibro = this.libroService.currentBook.titulo;
+    let tituloSha256 = sha256(this.tituloLibro);
     console.log(tituloSha256);
     const pathPdf = './../assets/pen5/li6/' + tituloSha256;
     this.sourcePDF = pathPdf.toString();

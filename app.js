@@ -47,20 +47,12 @@ function initWindow() {
     })
   );
 
-  appWindow.removeMenu();
+  //ocultar la barra de Menu
+  if (process.platform === 'darwin') {
+    app.dock.hide();
+  }
+ // appWindow.removeMenu();
 
-  /*
-  workerWindow = new BrowserWindow({
-    show: false
-  });
-  workerWindow.loadURL("file://" + __dirname + "/dist/worker.html");
-
-  // workerWindow.hide();
-  workerWindow.on("closed", () => {
-    workerWindow = null;
-  });
-
-   */
 
   // Initialize the DevTools.
   //appWindow.webContents.openDevTools();
