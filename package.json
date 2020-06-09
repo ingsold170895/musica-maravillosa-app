@@ -19,7 +19,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dist-publish": "electron-builder . MusicaMaravillosa  --win --x64 --publish onTagOrDraft",
+    "dist-publish": "electron-builder . MusicaMaravillosa  --win --x64 --publish always",
     "dist-publish-mac": "electron-builder . MusicaMaravillosa  --mac --x64 --publish onTagOrDraft",
     "electron": "concurrently \"ng serve --open --port=4204\" \"electron .\"",
     "electron-build": "ng build --prod --base-href ./ && electron .",
