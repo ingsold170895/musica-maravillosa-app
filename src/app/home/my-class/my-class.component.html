@@ -37,6 +37,9 @@
     <mat-divider></mat-divider>
     <mat-label class="label-mis-tareas">Mis Tareas</mat-label>
     <div class="student-details">
+      <div *ngIf="!studentTareasDataSource" class="sin-tareas">
+        [Aun no tienes ninguna tarea registrada]
+      </div>
       <div *ngIf="studentTareasDataSource">
         <table mat-table [dataSource]="studentTareasDataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="fecha">

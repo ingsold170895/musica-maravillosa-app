@@ -52,13 +52,7 @@ export class LoginComponent implements OnInit {
   ) {
 
 
-    // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
-      this.authenticationService.pathRoot = this.router.routerState.snapshot.url.toLowerCase();
-      this.libroService.currentAccess = null;
-      this.router.navigate(['/music/home']);
-    }
+
   }
 
   ngOnInit() {
@@ -82,6 +76,18 @@ export class LoginComponent implements OnInit {
      });
     });
 
+    if(this.downloadProgress){
+      this.errorPassword = "Actualización en curso";
+    } else {
+
+      // redirect to home if already logged in
+      if (this.authenticationService.currentUserValue) {
+        this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
+        this.authenticationService.pathRoot = this.router.routerState.snapshot.url.toLowerCase();
+        this.libroService.currentAccess = null;
+        this.router.navigate(['/music/home']);
+      }
+    }
 
 
     console.log(isUpdateReady);
@@ -155,26 +161,17 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log('se hara login');
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
-          console.log('este es el token en completito');
           if (data.id_token != null) {
             this.authenticationService.requestAccount().pipe(first()).subscribe(user => {
-              console.log('este es el usuario completito:');
-              console.log(user);
               if (user.token === '') {
-                //this.router.navigate(['/music/home']);
-                console.log('datacmputer: ');
-                console.log(DataComputer);
-                console.log('user macc registered: ', user.macaddressData);
                 if (user.macaddressData === DataComputer) {
                   this.router.navigate(['/music/home']);
                 } else {
-                  this.error = 'Esta computadora no esta registrada para este Usuario';
+                  this.error = 'Esta computadora no esta registrada para este Usuario. Utiliza "Olvide mi contraseña" para registrarte en esta computadora. "';
                   this.loading = false;
                   this.submitted = false;
                   this.textButton = 'Entrar';
@@ -188,7 +185,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error);
-          if (error.toString() === 'error.http.401') {
+          if (error.toString() === 'Error de Autenticación' || error.toString() === 'Bad credentials') {
             this.error = 'Datos Incorrectos';
           } else {
             if (error.message === 'Timeout has occurred') {

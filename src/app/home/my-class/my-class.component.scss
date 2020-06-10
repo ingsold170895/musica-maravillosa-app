@@ -2,19 +2,30 @@
 @import './src/theme.scss';
 
 .mat-display-1 {
-  height: 5rem;
   background: mat-color($candy-app-primary);
   margin-bottom: 0;
   padding: 15px;
   color: white;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  height: 5.1rem;
 }
 .container {
   margin-top: 2rem;
+  padding-top: 4rem;
 }
 
 .label-mis-tareas {
   color: white;
   font-size: xx-large;
+}
+
+.sin-tareas {
+  color: #3c23059c;
+  font-size: 1.5rem;
+  padding: 20px;
 }
 
 .label-profesor {
@@ -76,7 +87,9 @@
   position: fixed;
   top: 15px;
   right: 0;
-  width: 16vw;
+  width: 13rem;
+  height: auto;
+  z-index: 20;
 }
 
 .fix button{
@@ -100,3 +113,5 @@
     z-index: -100;
   }
 }
+
+

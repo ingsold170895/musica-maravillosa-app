@@ -4,8 +4,8 @@
   "description": "An awesome app!",
   "main": "app.js",
   "author": {
-    "name": "Carlos Campoverde",
-    "email": "carlosc@ingeniar.com.ec",
+    "name": "IngeniarSoft Company",
+    "email": "ingeniarsoft.company@gmail.com",
     "url": "https://www.linkedin.com/in/carlos-campoverde-8252031a7/"
   },
   "scripts": {

@@ -2,14 +2,29 @@
 @import './src/theme.scss';
 
 .container {
-  padding-top: 3rem;
+  padding-top: 4rem;
+  margin-top: 3rem;
 }
 
 .mat-display-1 {
-  height: 4rem;
-  background: #f6f6f6;
-  padding-top: 5px;
+  background: mat-color($candy-app-primary);
   margin-bottom: 0;
+  padding: 15px;
+  color: white;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  height: 5.1rem;
+}
+
+.fix-logo img {
+  position: fixed;
+  top: 15px;
+  right: 0;
+  width: 13rem;
+  height: auto;
+  z-index: 20;
 }
 
 .cardList {
@@ -51,6 +66,13 @@ app-class-card {
 
 .text-area-estudiantes {
   height: 150px;
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+.text-instrucion-nuevos-s {
+  padding-top: 10px;
+  color: #945300;
 }
 
 
@@ -75,4 +97,12 @@ app-class-card {
   border-top-color: $color-app-accent;
   animation: spinner .8s linear infinite;
   padding-bottom: 25px;
+}
+
+.fix-background {
+  img{
+    height: 100vh;
+    position: fixed;
+    z-index: -100;
+  }
 }

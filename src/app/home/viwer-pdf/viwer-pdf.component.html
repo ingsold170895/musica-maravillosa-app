@@ -63,11 +63,12 @@
   </mat-grid-tile>
   <mat-grid-tile
     [colspan]="1"
-    [rowspan]="5">
+    [rowspan]="5"
+  style="top: 2.3rem">
     <div id="audio-player" class="col">
       <mat-advanced-audio-player [fxFlex.gt-sm]="100" [playlist]="msaapPlaylist" [displayTitle]="false"
                                  [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
-                                 size="4"
+                                 size="3"
                                  [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"
                                  (loadeddata)="setSizes()"></mat-advanced-audio-player>
     </div>

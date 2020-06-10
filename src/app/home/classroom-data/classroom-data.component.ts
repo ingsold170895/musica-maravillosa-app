@@ -5,6 +5,7 @@ import {TareaEjercicioOprecionRespuesta} from "@app/_models/TareaEjercicioOpreci
 import {TareaEjercicio} from "@app/_models/TareaEjercicio";
 import {ModalService} from "@app/_modals";
 import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-classroom-data',
@@ -22,14 +23,24 @@ export class ClassroomDataComponent implements OnInit {
   idRespuestasModal = 'idRespuestasModal';
   errorDeleteStudent: string;
   idConfirmationDialogDeleteStudent: string = 'idModalDeleteStudent';
+  idModalAddStudents: string = 'idModalAddStudents';
+  aulaForm: FormGroup;
+  loadingCreate: boolean;
+  errorCreate: string;
+  textCreateButton: string = 'Agregar';
 
-  constructor(private aulaService: AulaService,
+  constructor(private formBuilder: FormBuilder,
+              private aulaService: AulaService,
               private modalService: ModalService,
               private tareaEjercicioService: TareaEjerciciosService) {
   }
 
   ngOnInit() {
+    this.aulaForm = this.formBuilder.group({
+      estudiantes: ['', [Validators.required]]
+    });
     this.fillStudentsList();
+    this.errorCreate = '';
   }
 
   fillStudentsList() {
@@ -40,18 +51,22 @@ export class ClassroomDataComponent implements OnInit {
   }
 
   studentSelected(student: any) {
+    this.errorCreate = '';
     console.log('eligio a :', student);
     this.currentStudent = this.aulaService.getStudentByUserId(student.idUser);
     this.studentTareasDataSource = this.tareaEjercicioService.getTareasEjercicioByUserId(student.idUser);
   }
 
   tareaSelected(tarea) {
+    this.errorCreate = '';
     console.log(tarea);
     this.tareaDetailDataSource = this.tareaEjercicioService.allTareaaEjercicioOpcionRespuesta.filter(tareaRes => tareaRes.tareaEjercicioId === tarea.id);
     this.modalService.open(this.idRespuestasModal);
   }
 
   openModalConfirmation(student) {
+    this.errorCreate = '';
+    if(this.currentStudent)if(this.currentStudent.id === student.idUser)this.currentStudent = undefined;
     this.currentStudent = this.aulaService.getStudentByUserId(student.idUser);
     this.modalService.open(this.idConfirmationDialogDeleteStudent);
   }
@@ -60,17 +75,58 @@ export class ClassroomDataComponent implements OnInit {
     this.modalService.close(this.idConfirmationDialogDeleteStudent);
   }
 
+  openModalAddStudents() {
+    this.errorCreate = '';
+    this.modalService.open(this.idModalAddStudents);
+  }
+
+  closeModalAddStudents() {
+    this.modalService.close(this.idModalAddStudents);
+  }
+
+  addStudents(){
+    this.loadingCreate = true;
+    this.textCreateButton = '';
+    let studentsMails: string = this.aulaForm.controls.estudiantes.value;
+    if(studentsMails){
+      let studentsLCorreoList: string [] = studentsMails.split("\n");
+      this.aulaService.saveStudentsInAula(this.aulaService.currentAulaLoaded.id ,studentsLCorreoList).subscribe(response => {
+        console.log('Se registraron los estudiantes: ', response);
+        this.loadingCreate = false;
+        this.textCreateButton = 'Agregar';
+        this.closeModalAddStudents();
+        this.aulaForm.reset();
+        this.aulaService.getAllMyUsuarioAulas().subscribe(students => {
+          this.aulaService.loadUsuarioAulasByAulaId(this.aulaService.currentAulaLoaded);
+          this.fillStudentsList();
+          this.tareaEjercicioService.getAllTareaEjercioOpcionRespuestaByTeacher().subscribe(tareas => {
+            this.tareaEjercicioService.getTipoEjercicios().subscribe(tiposE => {
+              this.tareaEjercicioService.retrieveTareasEjercioFromTareasEjercicioRespuestas();
+            });
+          });
+        });
+      },error => {
+        this.errorCreate = error.toString();
+        this.loadingCreate = false;
+        this.textCreateButton = 'Agregar';
+      });
+    }
+  }
 
   deleteStudent() {
+    this.studentTareasDataSource = [];
+    this.modalService.close(this.idConfirmationDialogDeleteStudent);
     this.aulaService.deleteUsuarioAula(this.currentStudent.id).subscribe(response => {
       this.aulaService.getAllMyUsuarioAulas().subscribe(students => {
         this.aulaService.loadUsuarioAulasByAulaId(this.aulaService.currentAulaLoaded);
         this.fillStudentsList();
+        this.currentStudent = undefined;
       });
       this.errorDeleteStudent = '';
     },error => this.errorDeleteStudent = 'No se pudo borrar el estudiante');
   }
 }
+
 
 class studentItem {
   position: number;

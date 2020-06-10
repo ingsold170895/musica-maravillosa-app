@@ -1,3 +1,6 @@
+@import '~@angular/material/_theming.scss';
+@import './src/theme.scss';
+
 
 :host{
   display: flex;
@@ -5,11 +8,45 @@
   height: 96vh;
 }
 
+.container {
+  padding-top: 5rem;
+}
+
+.sin-libros {
+  text-align: center;
+  font-size: 2rem;
+  color: #824f147a;
+}
+
 .mat-display-2 {
   height: 4rem;
   background: #f6f6f6;
   padding-top: 5px;
   margin-bottom: 0;
+
+}
+
+
+.mat-display-1 {
+  background: mat-color($candy-app-primary);
+  margin-bottom: 0;
+  padding: 15px;
+  color: white;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  height: 3.4rem;
+}
+
+
+.fix-logo img {
+  position: fixed;
+  top: 15px;
+  right: 0;
+  width: 13rem;
+  height: auto;
+  z-index: 20;
 }
 
 .fix button{

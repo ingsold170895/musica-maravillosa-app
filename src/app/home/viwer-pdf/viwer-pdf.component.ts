@@ -36,7 +36,7 @@ declare function prepareButtonPrintPentagrama(): any;
 export class ViwerPdfComponent implements OnInit, AfterViewInit {
   msbapTitle = 'Audio Title';
   msbapAudioUrl = '';
-  msaapPageSizeOptions = [4];
+  msaapPageSizeOptions = [3];
   msbapDisplayTitle = true;
   msbapDisplayVolumeControls = true;
 

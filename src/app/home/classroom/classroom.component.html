@@ -1,4 +1,8 @@
 <h1 class="mat-display-1">Mis Aulas</h1>
+<div class="fix-logo">
+  <img src="assets/images/logo-light.png">
+</div>
+
 <div class="container">
   <div>Añadir</div>
   <button mat-icon-button (click)="openModalCreateClassroom()">
@@ -12,7 +16,7 @@
   </div>
 </div>
 
-<app-modal-password id="idModalCreateClassroom" class="h-100 align-items-center" [marginSpace]="'25%'">
+<app-modal-password id="idModalCreateClassroom" class="h-75 align-items-center" [marginSpace]="'25%'">
   <div class="container">
     <mat-card class="card-create-classroom">
       <mat-card-header>Nueva Aula</mat-card-header>
@@ -39,6 +43,9 @@
             <span *ngIf="!loadingCreate">{{textCreateButton}}</span></button>
           <div *ngIf="errorCreate" class="alert alert-danger mt-3 mb-0">{{errorCreate}}</div>
         </form>
+        <div class="text-instrucion-nuevos-s">
+          Escribe el correo de los estudiantes a agregar, uno en cada línea.
+        </div>
       </mat-card-content>
     </mat-card>
   </div>

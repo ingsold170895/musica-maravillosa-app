@@ -7,6 +7,7 @@ import {AuthenticationService} from "@app/_services";
 import {ModalService} from "@app/_modals";
 import {from, Observable} from "rxjs";
 import {concatMap} from "rxjs/operators";
+import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
 
 @Component({
   selector: 'app-classroom',
@@ -27,7 +28,8 @@ export class ClassroomComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private modalService: ModalService,
               private aulaService: AulaService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private tareaEjercicioService: TareaEjerciciosService) {
   }
 
   ngOnInit() {
@@ -60,6 +62,17 @@ export class ClassroomComponent implements OnInit {
         let studentsLCorreoList: string [] = studentsMails.split("\n");
         this.aulaService.saveStudentsInAula(newAula.id ,studentsLCorreoList).subscribe(response => {
           console.log('Se registraron los estudiantes: ', response);
+          this.aulaService.getAllMyUsuarioAulas().subscribe(response => {
+            this.tareaEjercicioService.getAllTareaEjercioOpcionRespuestaByTeacher().subscribe(tareas => {
+              this.tareaEjercicioService.getTipoEjercicios().subscribe(tiposE => {
+                this.tareaEjercicioService.retrieveTareasEjercioFromTareasEjercicioRespuestas();
+              });
+            });
+          })
+        }, error => {
+          this.errorCreate = error.toString();
+          this.loadingCreate = false;
+          this.textCreateButton = 'Crear';
         });
       }
     });
@@ -79,7 +92,11 @@ export class ClassroomComponent implements OnInit {
   }
 
   deleteAula() {
+    let idAulaDelete = this.aulaDelete.id;
     this.aulaService.deleteAula(this.aulaDelete).subscribe(aula => {
+      this.aulaService.liberarStudentsAfterDeleteAula(idAulaDelete).subscribe(response => {
+        console.log("alumnos liberados");
+      });
       this.aulaService.getAllMyClassrooms().subscribe(classrooms => {
         this.aulaService.currentAulaList = classrooms as Aula[];
         this.classroomsList = this.aulaService.currentAulaList;

@@ -84,6 +84,13 @@ export class AulaService {
       }));
   }
 
+  liberarStudentsAfterDeleteAula(idUsuarioAula: number){
+    return this.http.delete(`${environment.apiUrl}/api/all-usuario-aulasByAulaId/${idUsuarioAula}`,{headers: this.headers})
+      .pipe(map(response => {
+        console.log(response);
+      }));
+  }
+
   deleteUsuarioAula(idUsuarioAula: number){
     console.log('se elminiara el estudiante: ', idUsuarioAula );
     return this.http.delete(`${environment.apiUrl}/api/usuario-aulas/${idUsuarioAula}`,{headers: this.headers})
