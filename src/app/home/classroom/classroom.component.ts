@@ -19,11 +19,16 @@ export class ClassroomComponent implements OnInit {
 
   classroomsList: Aula[];
   idModalCreateClassroom: string = 'idModalCreateClassroom';
+  idModalLoadingCreateClass: string = 'idModalLoadingCreateClass';
   aulaForm: FormGroup;
   loadingCreate: boolean;
   textCreateButton: string = 'Crear';
   errorCreate: string;
   aulaDelete: Aula;
+  loadingCreateClass: boolean;
+  loadingDeleteClass: boolean;
+  textDeleteConfirmButton: string = 'Si';
+
 
   constructor(private formBuilder: FormBuilder,
               private modalService: ModalService,
@@ -46,6 +51,8 @@ export class ClassroomComponent implements OnInit {
   }
 
   crearAula() {
+    this.loadingCreateClass = true;
+    this.modalService.open(this.idModalLoadingCreateClass);
     this.loadingCreate = true;
     this.textCreateButton = '';
     let aula: Aula = new Aula();
@@ -70,15 +77,20 @@ export class ClassroomComponent implements OnInit {
             });
           })
         }, error => {
+          this.aulaService.errorCreateClassroom = this.aulaService.errorCreateClassroom + "\n" +error.toString();
           this.errorCreate = error.toString();
           this.loadingCreate = false;
           this.textCreateButton = 'Crear';
+          this.modalService.close(this.idModalLoadingCreateClass);
         });
       }
+      this.loadingCreateClass = false;
+      this.modalService.close(this.idModalLoadingCreateClass);
     });
     this.loadingCreate = false;
     this.textCreateButton = 'Crear';
     this.modalService.close(this.idModalCreateClassroom);
+    this.modalService.close(this.idModalLoadingCreateClass);
   }
 
   openModalCreateClassroom() {
@@ -92,6 +104,8 @@ export class ClassroomComponent implements OnInit {
   }
 
   deleteAula() {
+    this.loadingDeleteClass = true;
+    this.textDeleteConfirmButton = '';
     let idAulaDelete = this.aulaDelete.id;
     this.aulaService.deleteAula(this.aulaDelete).subscribe(aula => {
       this.aulaService.liberarStudentsAfterDeleteAula(idAulaDelete).subscribe(response => {
@@ -101,10 +115,14 @@ export class ClassroomComponent implements OnInit {
         this.aulaService.currentAulaList = classrooms as Aula[];
         this.classroomsList = this.aulaService.currentAulaList;
         this.modalService.close(this.idConfirmationDialog);
+        this.loadingDeleteClass = false;
+        this.textDeleteConfirmButton = 'Si';
       });
     }, err => {
       alert("No se pudo eliminar el Aula");
       this.modalService.close(this.idConfirmationDialog);
+      this.loadingDeleteClass = false;
+      this.textDeleteConfirmButton = 'Si';
     });
   }
 

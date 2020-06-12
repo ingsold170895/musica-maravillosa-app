@@ -8,6 +8,7 @@ import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
 import {AuthenticationService} from "@app/_services";
 import {TareaEjercicioOprecionRespuesta} from "@app/_models/TareaEjercicioOprecionRespuesta";
 import {ModalService} from "@app/_modals";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-class',
@@ -29,13 +30,16 @@ export class MyClassComponent implements OnInit {
   tareaDetailDataSource: TareaEjercicioOprecionRespuesta[];
   displayedrespuestasColumns: string[] = ['nroRespuesta','ejercicioOpcionPreguntaEnunciado','respuesta','puntaje'];
   idRespuestasModal = 'idRespuestasModalStudent';
+  errorDeleteMyClass: string = '';
+  idModalDeleteMyClass: string = 'idModalDeleteMyClass';
 
 
   constructor(private formBuilder: FormBuilder,
               private aulaService: AulaService,
               private tareaEjercicioService: TareaEjerciciosService,
               private authenticationService: AuthenticationService,
-              private modalService: ModalService) { }
+              private modalService: ModalService,
+              private router: Router) { }
 
   ngOnInit() {
     this.claveAccesoForm = this.formBuilder.group({
@@ -83,6 +87,35 @@ export class MyClassComponent implements OnInit {
     console.log(tarea);
     this.tareaDetailDataSource = this.tareaEjercicioService.allTareaaEjercicioOpcionRespuesta.filter(tareaRes => tareaRes.tareaEjercicioId === tarea.id);
     this.modalService.open(this.idRespuestasModal);
+  }
+
+  deleteClass(){
+    this.aulaService.deleteUsuarioAula(this.aulaUsuario.id).subscribe(response => {
+      console.log("eliminado");
+      this.modalService.close(this.idModalDeleteMyClass);
+      this.aulaService.getMyClassrom().subscribe(usuarioAula => {
+        console.log(this.aulaService.myAulaStudent);
+        if (usuarioAula)
+          this.aulaService.getMyTeacherUserData(usuarioAula.aulaUsuarioCreacionId).subscribe(teacher => {
+            this.aulaService.myStudentTeacher = teacher;
+          });
+        this.aulaService.myAulaStudent = undefined;
+        this.router.navigate(['/music/home']);
+      }, err => {
+        console.log('Este usuarui no tiene un aula', err);
+      });
+    }, error => {
+      this.errorDeleteMyClass = 'No se pudo eliminar el aula. '+error;
+      this.modalService.close(this.idModalDeleteMyClass);
+    });
+  }
+
+  openConfirmationDeleteMyClass() {
+    this.modalService.open(this.idModalDeleteMyClass);
+  }
+
+  closeModalConfirmationDeleteMyClass(){
+    this.modalService.close(this.idModalDeleteMyClass);
   }
 
 }

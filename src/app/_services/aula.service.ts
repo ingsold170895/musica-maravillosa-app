@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Aula} from '@app/_models/Aula';
 import {environment} from '../../environments/environment';
-import {concatMap, map, timeout} from "rxjs/operators";
+import {concatMap, map, mergeMap, timeout} from "rxjs/operators";
 import {AuthenticationService} from "@app/_services/authentication.service";
 import {stringify} from "querystring";
 import {TipoAudio} from "@app/_models/TipoAudio";
@@ -26,6 +26,7 @@ export class AulaService {
   myStudentTeacher: User;
   currentAulaLoaded: Aula;
   subjectMyAulaStudent: BehaviorSubject<UsuarioAula>;
+  errorCreateClassroom: string = '';
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService) {
@@ -118,7 +119,6 @@ export class AulaService {
         .pipe(map(aula => {
           this.myAulaStudent = aula as UsuarioAula;
           this.subjectMyAulaStudent = new BehaviorSubject<UsuarioAula>(this.myAulaStudent);
-
           console.log('Mi Aula:', this.myAulaStudent);
           return aula;
         }));
@@ -130,16 +130,16 @@ export class AulaService {
   getMyTeacherUserData(idUsuario: number) {
     return this.http.get<User>(`${environment.apiUrl}/api/usuarios/${idUsuario}`,
       {headers: this.headers})
-      .pipe(map(aula => {
-        this.myAulaStudent = aula as UsuarioAula;
-        console.log('Mi Aula:', this.myAulaStudent);
-        return aula;
+      .pipe(map(teacherUser => {
+        this.myStudentTeacher = teacherUser as User;
+        console.log('Mi Profesor:', this.myStudentTeacher);
+        return teacherUser;
       }));
   }
 
   public saveStudentsInAula(idAula: number, correos: string[]){
     return from(correos).pipe(
-      concatMap(correo => <Observable<any>> this.http.get(`${environment.apiUrl}/api/registerInAulaByTeacher/${idAula}/${correo}`, {headers: this.headers}))
+      mergeMap(correo => <Observable<any>> this.http.get(`${environment.apiUrl}/api/registerInAulaByTeacher/${idAula}/${correo}`, {headers: this.headers}))
     );
   }
 

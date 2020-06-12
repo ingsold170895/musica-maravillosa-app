@@ -16,8 +16,8 @@
   </div>
 </div>
 
-<app-modal-password id="idModalCreateClassroom" class="h-75 align-items-center" [marginSpace]="'25%'">
-  <div class="container">
+<app-modal-password id="idModalCreateClassroom" class="align-items-center" [marginSpace]="'25%'">
+  <div class="container" style="margin-top: 0px; padding-top: 0px;">
     <mat-card class="card-create-classroom">
       <mat-card-header>Nueva Aula</mat-card-header>
       <mat-card-content>
@@ -33,7 +33,7 @@
             </mat-form-field>
           </p>
           <p>
-            <mat-form-field>
+            <mat-form-field style="width: 100%;">
               <mat-label>Estudiantes</mat-label>
               <textarea class="text-area-estudiantes" matInput formControlName="estudiantes"></textarea>
             </mat-form-field>
@@ -52,13 +52,21 @@
 </app-modal-password>
 
 <app-modal-password id="idConfirmationDialog" class="h-100 align-items-center" [marginSpace]="'30%'" [opacity]="0" [marginTop]="'20vh'">
-  <div class="align-items-center shadow">
+  <div class="align-items-center shadow" style="padding: 10px;
+    text-align: center;">
     <mat-label>¿Seguro desea eliminar el Aula?</mat-label>
     <br>
-    <form>
-      <button mat-button class="btn btn-primary" (click)="deleteAula()">Si</button>
-      <button mat-button class="btn btn-danger" (click)="closeModalConfirmation()">Cancelar</button>
+    <form style="padding: 10px">
+      <button mat-button class="btn btn-primary" (click)="deleteAula()" style="margin-right: 10px"
+              [class.spinner]="loadingDeleteClass">
+        <span *ngIf="!loadingDeleteClass">{{textDeleteConfirmButton}}</span>
+      </button>
+      <button mat-button class="btn btn-danger" (click)="closeModalConfirmation()" style="margin-left: 10px">Cancelar</button>
     </form>
   </div>
+</app-modal-password>
+
+<app-modal-password id="idModalLoadingCreateClass">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </app-modal-password>
 

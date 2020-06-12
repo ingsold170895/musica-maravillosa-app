@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://190.155.207.16:8085'
+  apiUrl: 'https://www.comisionservices.net:8085'
 };

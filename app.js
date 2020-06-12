@@ -36,7 +36,6 @@ function initWindow() {
   });
 
   appWindow.maximize();
-  appWindow.setResizable(false);
 
   // Electron Build Path
   appWindow.loadURL(
@@ -51,7 +50,7 @@ function initWindow() {
   if (process.platform === 'darwin') {
     app.dock.hide();
   }
- // appWindow.removeMenu();
+  appWindow.removeMenu();
 
 
   // Initialize the DevTools.

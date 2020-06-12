@@ -15,6 +15,16 @@
 
 .container {
   padding-top: 5rem;
+  margin-left: 2rem;
+
+  mat-grid-tile .mat-figure {
+    align-items: start;
+    padding-top: 4rem;
+  }
+
+  mat-grid-tile table {
+    width: 99%
+  }
 }
 
 .sin-estudiantes {
@@ -40,7 +50,13 @@
 
 .student-details {
   border-radius: 15px;
+  width: 100%;
+  table{
+    width: 90%;
+  }
 }
+
+
 
 .mat-column-fecha {
   width: 150px;

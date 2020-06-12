@@ -3,22 +3,13 @@
 
   </mat-grid-tile>
   <mat-grid-tile>
-    <form>
-      <mat-form-field>
-        <mat-label>Busca por Tema</mat-label>
-        <mat-select [(value)]="topicSelected" (selectionChange)="searchByTopic($event.value)">
-          <mat-option *ngFor="let tema of temas" [value]="tema.pagina">
-            {{tema.tema}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
+
   </mat-grid-tile>
 </mat-grid-list>
 -->
 <ngx-extended-pdf-viewer
   [src]="sourcePDF"
-  [height]="'85vh'"
+  [height]="'90vh'"
   [customToolbar]="myCustomButtons"
   [useBrowserLocale]="true"
   [page]="pageNumber"
@@ -31,27 +22,31 @@
   [showPrintButton]="false"
   useBrowserLocale="true"
   [showBorders]="true"
-  [zoom]="'page-fit'"
+  [zoom]="'130%'"
   [backgroundColor]="'#fafafa'"
 ></ngx-extended-pdf-viewer>
 <ng-template #myCustomButtons>
   <div id="toolbarViewer" style="background: #7d442d">
-    <div id="toolbarViewerLeft">
+    <div id="toolbarViewerLeft" style="color: white; padding: 5px;">
+      {{titulo}}
     </div>
     <div id="toolbarViewerRight">
-      <pdf-toggle-sidebar>
-
-      </pdf-toggle-sidebar>
-      <!--   <pdf-print [hidden]="!enablePrintPage" (click)="printCurrentPage()"></pdf-print>
-      <button mat-button [hidden]="!enablePrintPage" (click)="printCurrentPage()">
-        <mat-icon>print</mat-icon>
-      </button>
-      <button mat-button (click)="openDetailsModal()">
-        <mat-icon>info</mat-icon>
-      </button>
-      -->
+      <div style="top: 30px">
+       <!-- <form>
+          <mat-form-field>
+            <mat-label style="color: #333333">Busca por Tema</mat-label>
+            <mat-select [(value)]="topicSelected" (selectionChange)="searchByTopic($event.value)" style="height: 30px">
+              <mat-option *ngFor="let tema of temas" [value]="tema.pagina">
+                {{tema.tema}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        -->
+      </div>
     </div>
     <div class="text-center">
+      <pdf-zoom-toolbar></pdf-zoom-toolbar>
       <pdf-paging-area></pdf-paging-area>
     </div>
   </div>

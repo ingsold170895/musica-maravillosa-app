@@ -251,7 +251,7 @@ export class LoginComponent implements OnInit {
     }, err => {
       this.loadingReset = false;
       this.textResetPasswordButton = 'Enviar';
-      this.errorReset = 'No se pudo completar tu solicitud';
+      this.errorReset = err;
     });
   }
 

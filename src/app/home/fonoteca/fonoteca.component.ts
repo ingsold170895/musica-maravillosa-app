@@ -43,10 +43,14 @@ export class FonotecaComponent implements OnInit, AfterViewInit {
     this.temasList = this.libroService.currentPageContents.map(libroContenido => {
       return {numeroPagina: libroContenido.numeroPagina, tema: libroContenido.tema};
     });
+    this.temasList = this.removeDuplicateItemsInTemas(this.temasList);
+
     this.enableByTema = this.temasList.length > 0;
     console.log(this.temasList);
     this.searchAll();
+    console.log(this.libroService.tiposAudio);
     this.tiposAudio = this.libroService.tiposAudio;
+    console.log(this.tiposAudio);
     this.letSearchByPage = true;
     this.letSearchByTema = false;
     this.letSearchByTipo = false;
@@ -222,4 +226,21 @@ export class FonotecaComponent implements OnInit, AfterViewInit {
     });
     return cleaData;
   }
+
+  removeDuplicateItemsInTemas(duplicates: any[]): any[] {
+    if(!duplicates) return;
+    let cleanData = [];
+    duplicates.map(obj => {
+      console.log(obj);
+      let existItem = cleanData.filter(item => item.tema === obj.tema);
+      if (existItem.length === 0) {
+        cleanData.push(obj);
+      } else {
+        console.log('ya existe en clean data', obj);
+      }
+    });
+    return cleanData;
+  }
+
+
 }

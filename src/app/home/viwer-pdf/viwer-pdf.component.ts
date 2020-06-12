@@ -50,6 +50,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
 
   sourcePDF: string;
   tituloLibro: string;
+  animacion_opcionMultiple: string = '';
 
   page: Pagina;
   narracionSource: string;
@@ -151,6 +152,10 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
     this.modalService.add(this.idModalLoading);
   }
 
+  goBackToHomePage(){
+    this.router.navigate(['/music/home/']);
+  }
+
   openDetailsModal() {
     this.modalService.open(this.idModalDetails);
   }
@@ -171,6 +176,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
       }
       if (this.contentPage.archivoVideo) { // PERMITIR MOSTRAR VIDEO
         this.enableVideoPage = true;
+        this.animacion_opcionMultiple = 'Animación';
         this.sourceVideo = this.contentPage.archivoVideo;
       }
       if (this.contentPage.pentagramaId) { // PERMITIR IMPRIMIR PENTAGRAMA
@@ -189,6 +195,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
       console.log(this.contentPage.ejercicioOpcionId);
       if (this.contentPage.ejercicioOpcionId) { // PERMITIR HACER EJERCICIO OPCION
         this.idEjercicioOpcionPage = this.contentPage.ejercicioOpcionId;
+        this.animacion_opcionMultiple = 'Ejercicio';
         this.currentEjercicioOpcion = this.ejercicioOpcionService.getEjericioOpcionById(this.idEjercicioOpcionPage);
         this.currentEjercicioPreguntas = this.ejercicioOpcionService.currentEjercicioOpcionPreguntas;
         this.fillRespuestasIntoPreguntas();

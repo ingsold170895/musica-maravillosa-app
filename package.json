@@ -1,12 +1,12 @@
 {
   "name": "electron-angular-musica-m",
-  "version": "v0.1.6",
-  "description": "An awesome app!",
+  "version": "v1.0.0",
+  "description": "Una gran aplicación para que desde los mas pequeños aprendan Música!",
   "main": "app.js",
   "author": {
     "name": "IngeniarSoft Company",
     "email": "ingeniarsoft.company@gmail.com",
-    "url": "https://www.linkedin.com/in/carlos-campoverde-8252031a7/"
+    "url": "https://www.linkedin.com/company/ingeniarsoft/"
   },
   "scripts": {
     "start:electron": "ng build --base-href ./ && electron .",
@@ -20,7 +20,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dist-publish": "electron-builder . MusicaMaravillosa  --win --x64 --publish always",
-    "dist-publish-mac": "electron-builder . MusicaMaravillosa  --mac --x64 --publish onTagOrDraft",
+    "dist-publish-mac": "electron-builder . MusicaMaravillosa  --mac --x64 --publish always",
     "electron": "concurrently \"ng serve --open --port=4204\" \"electron .\"",
     "electron-build": "ng build --prod --base-href ./ && electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/assets/images/icon.icns --prune=true",

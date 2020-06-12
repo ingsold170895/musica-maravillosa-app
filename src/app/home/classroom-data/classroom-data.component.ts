@@ -6,6 +6,7 @@ import {TareaEjercicio} from "@app/_models/TareaEjercicio";
 import {ModalService} from "@app/_modals";
 import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-classroom-data',
@@ -32,6 +33,7 @@ export class ClassroomDataComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private aulaService: AulaService,
               private modalService: ModalService,
+              private router: Router,
               private tareaEjercicioService: TareaEjerciciosService) {
   }
 
@@ -41,6 +43,7 @@ export class ClassroomDataComponent implements OnInit {
     });
     this.fillStudentsList();
     this.errorCreate = '';
+    if(this.aulaService.errorCreateClassroom) this.errorCreate = this.aulaService.errorCreateClassroom;
   }
 
   fillStudentsList() {
@@ -111,6 +114,10 @@ export class ClassroomDataComponent implements OnInit {
         this.textCreateButton = 'Agregar';
       });
     }
+  }
+
+  goBackToClassroomsPage(){
+    this.router.navigate(['/music/classrooms/']);
   }
 
   deleteStudent() {

@@ -4,3 +4,12 @@
   padding-top: 5px;
   margin-bottom: 0;
 }
+
+
+#toolbarViewerLeft {
+  width: 30%;
+}
+
+#toolbarViewerRight {
+  width: 30%;
+}

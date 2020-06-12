@@ -1,4 +1,4 @@
-<h1 class="mat-display-1">Mis Aulas</h1>
+<h1 class="mat-display-1"><mat-icon style="cursor: pointer" (click)="goBackToClassroomsPage()">arrow_back_ios</mat-icon>Mis Aulas</h1>
 <div class="fix-background">
   <img src="assets/images/page-background.jpg">
 </div>
@@ -12,7 +12,7 @@
       <mat-icon>add_circle_outline</mat-icon>
     </button>
   </div>
-  <div *ngIf="errorCreate" style="right: 40px" class="alert alert-danger mt-3 mb-0">{{errorCreate}}</div>
+  <div *ngIf="errorCreate" class="alert alert-danger mt-3 mb-0">{{errorCreate}}</div>
 
   <mat-grid-list [cols]="3">
     <mat-grid-tile>
