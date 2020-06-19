@@ -1,0 +1,22 @@
+
+.container {
+  padding-top: 5rem;
+  margin-left: 2rem;
+}
+
+.fix-background {
+  img{
+    height: 100vh;
+    position: fixed;
+    z-index: -100;
+  }
+}
+
+.fix-logo img {
+  position: fixed;
+  top: 15px;
+  right: 0;
+  width: 13rem;
+  height: auto;
+  z-index: 20;
+}

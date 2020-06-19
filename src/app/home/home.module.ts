@@ -21,6 +21,7 @@ import { ClassCardComponent } from './class-card/class-card.component';
 import { ClassroomDataComponent } from './classroom-data/classroom-data.component';
 import { PentagramaPdfComponent } from './viwer-pdf/pentagrama-pdf/pentagrama-pdf.component';
 import { MyClassComponent } from './my-class/my-class.component';
+import { ExportAllStudentsComponent } from './classroom-data/export-all-students/export-all-students.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  declarations: [ViwerPdfComponent, VideoPlayerComponent, BookComponent, FonotecaComponent, GuideComponent, AccountComponent, ClassroomComponent, ClassCardComponent, ClassroomDataComponent, PentagramaPdfComponent, MyClassComponent],
+  declarations: [ViwerPdfComponent, VideoPlayerComponent, BookComponent, FonotecaComponent, GuideComponent, AccountComponent, ClassroomComponent, ClassCardComponent, ClassroomDataComponent, PentagramaPdfComponent, MyClassComponent, ExportAllStudentsComponent],
   exports: [
     ViwerPdfComponent,
     VideoPlayerComponent,

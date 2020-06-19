@@ -39,6 +39,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   msaapPageSizeOptions = [3];
   msbapDisplayTitle = true;
   msbapDisplayVolumeControls = true;
+  autoPlay: boolean = false;
 
   isPlayingNarrador = false;
   narradorPrimeraVez = true;
@@ -50,6 +51,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
 
   sourcePDF: string;
   tituloLibro: string;
+  tituloSha256: string;
   animacion_opcionMultiple: string = '';
 
   page: Pagina;
@@ -141,9 +143,9 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
     this.thereIsAudio = false;
     //convert titulo con sha256
     this.tituloLibro = this.libroService.currentBook.titulo;
-    let tituloSha256 = sha256(this.tituloLibro);
-    console.log(tituloSha256);
-    const pathPdf = './../assets/pen5/li6/' + tituloSha256;
+    this.tituloSha256 = sha256(this.tituloLibro);
+    console.log(this.tituloSha256);
+    const pathPdf = './../assets/pen5/li6/' + this.tituloSha256;
     this.sourcePDF = pathPdf.toString();
     this.enableHomeworks = this.libroService.currentAccess
       .filter(access => access.libroId = this.libroService.currentBook.id)[0].cuadernoTrabajo;
@@ -165,6 +167,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   }
 
   pageChanged(currentPageNumber) {
+
     console.log('Cargando datos de la pagina: ' + currentPageNumber);
     this.clearPage();
     this.chargeAllContentsPage(currentPageNumber); // CARGAR CONTENIDO DE PAGINA, AUDIOS Y NARACCIÓN y KARAOKE
@@ -212,6 +215,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   }
 
   clearPage() {
+    this.autoPlay = false;
     this.narradorPrimeraVez = true;
     this.karaokePrimeraVez = true;
     this.sourcePentagramaImprimir = '';
@@ -332,6 +336,15 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
 
   printCurrentPage() {
     printJS('viewerContainer', 'html');
+  }
+
+  print(doc) {
+    var objFra = document.createElement('iframe');   // Create an IFrame.
+    objFra.style.visibility = "hidden";    // Hide the frame.
+    objFra.src = doc;                      // Set source.
+    document.body.appendChild(objFra);  // Add the frame to the web page.
+    objFra.contentWindow.focus();       // Set focus.
+    objFra.contentWindow.print();      // Print it.
   }
 
   setSizes() {
@@ -543,18 +556,22 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
   }
 
   cargarNarradores() {
+    this.autoPlay = true;
     this.msaapPlaylist = this.trackListNarraciones;
   }
 
   cargarCanciones() {
+    this.autoPlay = true;
     this.msaapPlaylist = this.trackListCanciones;
   }
 
   cargarKaraokes() {
+    this.autoPlay = true;
     this.msaapPlaylist = this.trackListKaraokes;
   }
 
   cargarAudios() {
+    this.autoPlay = true;
     this.msaapPlaylist = this.trackListAudios;
   }
 

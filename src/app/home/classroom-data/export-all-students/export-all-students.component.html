@@ -1,0 +1,26 @@
+<h1 class="mat-display-1"><mat-icon style="cursor: pointer" (click)="goBackPage()">arrow_back_ios</mat-icon>Mis Aulas</h1>
+<div class="fix-background">
+  <img src="assets/images/page-background.jpg">
+</div>
+<div class="fix-logo">
+  <img src="assets/images/logo-light.png">
+</div>
+<div class="container">
+  <p>
+    <br/>
+    <mat-label>Filtros de busqueda</mat-label>
+  </p>
+  <mat-divider></mat-divider>
+  <p>
+    <mat-form-field>
+      <mat-label>Libro</mat-label>
+      <mat-select  [(value)]="libroSelected" (selectionChange)="searchByLibro($event.value)">
+        <mat-option *ngFor="let libro of librosList" [value]="libro.id">
+          {{libro.titulo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+  <p>
+
+</div>

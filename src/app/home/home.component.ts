@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadingData = true;
-    this.cargarContenidos();
+    if(this.authenticationService.wasLogged)this.recargarContenidos();
+    else this.cargarContenidos();
     this.verifyDataLoaded();
   }
 

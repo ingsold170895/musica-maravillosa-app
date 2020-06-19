@@ -1,3 +1,6 @@
+<div class="fix-logo">
+  <img src="assets/images/logo.png" [routerLink]="['/music/home/']">
+</div>
 <mat-grid-list cols="5" rowHeight="13.6vh">
   <mat-grid-tile
     [colspan]="4"
@@ -68,7 +71,7 @@
     <div id="audio-player" class="col">
       <mat-advanced-audio-player [fxFlex.gt-sm]="100" [playlist]="msaapPlaylist" [displayTitle]="false"
                                  [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions"
-                                 size="3"
+                                 size="3" [autoPlay]="autoPlay"
                                  [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"
                                  (loadeddata)="setSizes()"></mat-advanced-audio-player>
     </div>
@@ -227,3 +230,5 @@
   </div>
 </div>
 <div [class.jw-modal-background]="isPrintPentagramaOpen"></div>
+
+<div id="pagetoPrint"></div>

@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
         this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         this.authenticationService.pathRoot = this.router.routerState.snapshot.url.toLowerCase();
         this.libroService.currentAccess = null;
+        this.authenticationService.wasLogged = true;
         this.router.navigate(['/music/home']);
       }
     }
@@ -169,6 +170,7 @@ export class LoginComponent implements OnInit {
             this.authenticationService.requestAccount().pipe(first()).subscribe(user => {
               if (user.token === '') {
                 if (user.macaddressData === DataComputer) {
+                  this.authenticationService.wasLogged = false;
                   this.router.navigate(['/music/home']);
                 } else {
                   this.error = 'Esta computadora no esta registrada para este Usuario. Utiliza "Olvide mi contraseña" para registrarte en esta computadora. "';

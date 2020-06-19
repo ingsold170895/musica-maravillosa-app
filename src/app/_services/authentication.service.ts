@@ -18,6 +18,7 @@ export class AuthenticationService {
   public isTeacher: boolean;
   public pathRoot: string;
   public isAuthenticated: boolean;
+  public wasLogged: boolean;
 
   //DATA LOADED
   tareasTeacherDataLoaded: boolean = false;
