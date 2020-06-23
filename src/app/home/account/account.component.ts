@@ -27,6 +27,8 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
     this.user = this.authenticationService.currentUserValue;
     this.profile =  (this.user.idPerfil === Constants.PERFIL_ADMIN)? Constants.PERFIL_ADMIN_NAME:
+                    (this.user.idPerfil === Constants.PERFIL_ADMIN_CONTENIDO)? Constants.PERFIL_ADMIN_CONTENIDO_NAME:
+                    (this.user.idPerfil === Constants.PERFIL_ADMIN_USUARIOS)? Constants.PERFIL_ADMIN_USUARIOS_NAME:
                     (this.user.idPerfil === Constants.PERFIL_PROFESOR)? Constants.PERFIL_PROFESOR_NAME : Constants.PERFIL_USUARIO_NAME;
     this.newPasswordForm = this.formBuilder.group({
       currentPassword: ['', [Validators.required]],

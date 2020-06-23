@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     } else {
 
       // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
+      if (this.authenticationService.currentUserValue ) {
         this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
         this.authenticationService.pathRoot = this.router.routerState.snapshot.url.toLowerCase();
         this.libroService.currentAccess = null;
@@ -222,6 +222,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         if (user.token === '') {
           this.authenticationService.saveDataComputer(DataComputer).subscribe(user => {
+              this.authenticationService.wasLogged = false;
               this.router.navigate(['/music/home']);
             }
             , err => {

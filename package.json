@@ -1,6 +1,6 @@
 {
   "name": "electron-angular-musica-m",
-  "version": "v1.0.0",
+  "version": "v1.0.2",
   "description": "Una gran aplicación para que desde los mas pequeños aprendan Música!",
   "main": "app.js",
   "author": {
