@@ -28,7 +28,9 @@ export class SidenavComponent {
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.isTeacher = (this.authenticationService.currentUserValue.idPerfil === Constants.PERFIL_PROFESOR);
-    this.isAdmin = (this.authenticationService.currentUserValue.idPerfil === Constants.PERFIL_ADMIN);
+    this.isAdmin = (this.authenticationService.currentUserValue.idPerfil === Constants.PERFIL_ADMIN ||
+                    this.authenticationService.currentUserValue.idPerfil === Constants.PERFIL_ADMIN_USUARIOS ||
+                    this.authenticationService.currentUserValue.idPerfil === Constants.PERFIL_ADMIN_CONTENIDO);
     this.showAdminOptions = this.isTeacher || this.isAdmin;
   }
 
