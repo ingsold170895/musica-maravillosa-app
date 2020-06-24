@@ -33,7 +33,10 @@ export class LibroService {
   allMyPageAudios: LibroAudio[];
   allContentPageByEjercicioOpcion: LibroContenido[];
   allContentPageByEjercicioIteractivo: LibroContenido[];
+  allContentPageMerged: LibroContenido[];
   librosData: Libro[];
+  allContentPageLoaded: boolean;
+
 
   constructor(private http: HttpClient,
               private auhtenticationService: AuthenticationService) {
@@ -129,6 +132,7 @@ export class LibroService {
       this.allContentPageByEjercicioOpcion = data as LibroContenido[];
       console.log('esotos son los contenidos por EjercicioOpcion');
       console.log(this.allContentPageByEjercicioOpcion);
+      this.mergeContentPageByOpcionYIteractivo();
       return this.allContentPageByEjercicioOpcion;
     }));
   }
@@ -141,8 +145,17 @@ export class LibroService {
       this.allContentPageByEjercicioIteractivo = data as LibroContenido[];
       console.log('Estos son los contenidos por EjercicioIteractivo');
       console.log(this.allContentPageByEjercicioIteractivo);
+      this.mergeContentPageByOpcionYIteractivo();
       return this.allContentPageByEjercicioIteractivo;
     }));
+  }
+
+  mergeContentPageByOpcionYIteractivo(): LibroContenido[] {
+    if(!this.allContentPageByEjercicioOpcion && !this.allContentPageByEjercicioIteractivo) this.allContentPageMerged = [];
+    if(!this.allContentPageByEjercicioOpcion && this.allContentPageByEjercicioIteractivo) this.allContentPageMerged = this.allContentPageByEjercicioIteractivo;
+    if(this.allContentPageByEjercicioOpcion && !this.allContentPageByEjercicioIteractivo) this.allContentPageMerged = this.allContentPageByEjercicioOpcion;
+    if(this.allContentPageByEjercicioOpcion && this.allContentPageByEjercicioIteractivo) this.allContentPageMerged = this.allContentPageByEjercicioOpcion.concat(this.allContentPageByEjercicioIteractivo);
+    return this.allContentPageMerged;
   }
 
   getPageContentsFromLocalData(idLibro: number) {
@@ -235,8 +248,9 @@ export class LibroService {
     this.subjectCurrentAccess = undefined;
     this.allMyPageContents = [];
     this.allMyPageAudios = [];
-    this.allContentPageByEjercicioOpcion = [];
+    this.allContentPageByEjercicioOpcion = undefined;
     this.allContentPageByEjercicioIteractivo = [];
     this.librosData = [];
+    this.allContentPageLoaded = false;
   }
 }

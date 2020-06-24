@@ -113,9 +113,10 @@ export class HomeComponent implements OnInit {
 
     //CARGAR CONTENIDO DEL LIBRO DE LOS EJERCICIOS OPCION E ITERACTIVO
 
-    if (!this.libroService.allContentPageByEjercicioOpcion) {
+    if (!this.libroService.allContentPageLoaded) {
       this.libroService.getAllPageContentsByEjercicioOpcion().subscribe(contents => {
         console.log('Contenidos Por EjercicioOpcion cargados');
+        this.libroService.allContentPageLoaded = true;
         this.authenticationService.contentPageEjercicioOpcionDataLoaded = true;
         this.verifyDataLoaded();
         console.log(this.allDataLoaded); //1
@@ -225,6 +226,7 @@ export class HomeComponent implements OnInit {
     this.aulaService.myAulaStudent = null;
     this.libroService.currentAccess = null;
     this.ejercicioOpcionService.ejerciciosLoaded = false;
+    this.libroService.allContentPageLoaded = false;
     this.aulaService.isAulasTeacherLoaded = false;
     this.libroService.librosData = null;
     this.tareaEjercicioService.tipoEjercicios = null;

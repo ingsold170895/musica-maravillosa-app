@@ -132,6 +132,10 @@ export class ClassroomDataComponent implements OnInit {
       this.errorDeleteStudent = '';
     },error => this.errorDeleteStudent = 'No se pudo borrar el estudiante');
   }
+
+  exportCalificaciones(){
+    this.router.navigate(['/music/exportScores/']);
+  }
 }
 
 

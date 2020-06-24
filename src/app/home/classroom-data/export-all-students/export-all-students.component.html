@@ -1,4 +1,7 @@
-<h1 class="mat-display-1"><mat-icon style="cursor: pointer" (click)="goBackPage()">arrow_back_ios</mat-icon>Mis Aulas</h1>
+<h1 class="mat-display-1">
+  <mat-icon style="cursor: pointer" (click)="goBackPage()">arrow_back_ios</mat-icon>
+  Mis Aulas
+</h1>
 <div class="fix-background">
   <img src="assets/images/page-background.jpg">
 </div>
@@ -12,15 +15,51 @@
   </p>
   <mat-divider></mat-divider>
   <p>
-    <mat-form-field>
+    <mat-form-field *ngIf="librosList" style="width: 300px">
       <mat-label>Libro</mat-label>
-      <mat-select  [(value)]="libroSelected" (selectionChange)="searchByLibro($event.value)">
-        <mat-option *ngFor="let libro of librosList" [value]="libro.id">
-          {{libro.titulo}}
+      <mat-select [(value)]="libroSelected" (selectionChange)="searchByLibro($event.value)">
+        <mat-option *ngFor="let libro of librosList" [value]="libro">
+          {{libro}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </p>
   <p>
+
+  <p>
+    <mat-form-field style="padding-right: 20px"><input matInput [matDatepicker]="picker1" placeholder="Elige la fecha Inicial"
+                           [(ngModel)]="dateDesde">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1 ></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field><input matInput [matDatepicker]="picker2" placeholder="Elige la fecha Final"
+                           [(ngModel)]="dateHasta">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2 ></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+  <table *ngIf="displayedColumns" mat-table [dataSource]="scoresDataSource" class="mat-elevation-z8" style="width: 100%">
+    <ng-container matColumnDef="estudiante">
+      <th mat-header-cell *matHeaderCellDef> Estudiante</th>
+      <td mat-cell *matCellDef="let element"> {{element.estudiante}} </td>
+    </ng-container>
+
+    <ng-container *ngFor="let ejercicioColumn of ejerciciosColumnsNames; let colIndex = index"
+                  matColumnDef="{{ejercicioColumn}}">
+      <th mat-header-cell *matHeaderCellDef>{{ejercicioColumn}}</th>
+      <td mat-cell *matCellDef="let element">{{element.ejercicios[colIndex]? element.ejercicios[colIndex].puntajeTotal : 0}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="promedio">
+      <th mat-header-cell *matHeaderCellDef> Promedio</th>
+      <td mat-cell *matCellDef="let element"> {{element.promedio}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
 
 </div>

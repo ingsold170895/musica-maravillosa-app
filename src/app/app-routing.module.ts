@@ -11,6 +11,7 @@ import {ClassroomComponent} from "@app/home/classroom/classroom.component";
 import {ClassroomDataComponent} from "@app/home/classroom-data/classroom-data.component";
 import {VideoPlayerComponent} from "@app/home/video-player/video-player.component";
 import {MyClassComponent} from "@app/home/my-class/my-class.component";
+import {ExportAllStudentsComponent} from "@app/home/classroom-data/export-all-students/export-all-students.component";
 
 const routes: Routes = [
   {
@@ -79,6 +80,13 @@ const routes: Routes = [
         component: MyClassComponent,
         data: {
           pageTitle: 'MyClassroom'
+        }
+      },
+      {
+        path: 'exportScores',
+        component: ExportAllStudentsComponent,
+        data: {
+          pageTitle: 'Calificaciones'
         }
       }
     ]

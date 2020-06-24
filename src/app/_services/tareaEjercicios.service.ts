@@ -15,7 +15,7 @@ import {LibroContenido} from "@app/_models/LibroContenido";
 
 
 @Injectable({providedIn: 'root'})
-export class TareaEjerciciosService{
+export class TareaEjerciciosService {
 
   headers: HttpHeaders;
 
@@ -31,7 +31,7 @@ export class TareaEjerciciosService{
     this.headers = this.authenticationService.headers;
   }
 
-  getAllTareaEjercioOpcionRespuestaByTeacher(){
+  getAllTareaEjercioOpcionRespuestaByTeacher() {
     console.log('caragaremos todos los jerciicos de todo los estudaintes de ', this.authenticationService.currentUserValue.id);
     return this.http.get<TareaEjercicioOprecionRespuesta[]>(`${environment.apiUrl}/api/tarea-ejercicio-opcion-respuestasByTeacherId/${this.authenticationService.currentUserValue.id}`,
       {headers: this.headers})
@@ -42,7 +42,7 @@ export class TareaEjerciciosService{
       }));
   }
 
-  getAllTareaEjercioOpcionRespuestaByStudent(){
+  getAllTareaEjercioOpcionRespuestaByStudent() {
     console.log('caragaremos todos los jerciicos del estudiante ', this.authenticationService.currentUserValue.id);
     return this.http.get<TareaEjercicioOprecionRespuesta[]>(`${environment.apiUrl}/api/tarea-ejercicio-opcion-respuestasByStudentId/${this.authenticationService.currentUserValue.id}`,
       {headers: this.headers})
@@ -58,13 +58,13 @@ export class TareaEjerciciosService{
     this.allTareasEjercicio = [];
     this.allTareaaEjercicioOpcionRespuesta.map(tareaRespuesta => {
       console.log(tareaRespuesta.tareaejercicio.id);
-      if(this.allTareasEjercicio.findIndex(t => t.id == tareaRespuesta.tareaejercicio.id) === -1){
+      if (this.allTareasEjercicio.findIndex(t => t.id == tareaRespuesta.tareaejercicio.id) === -1) {
         tareaRespuesta.tareaejercicio.tipoEjercicioNombre =
           this.tipoEjercicios.filter(tipos => tipos.id === tareaRespuesta.tareaejercicio.tipoEjercicioId)[0].nombre;
         this.allTareasEjercicio.push(tareaRespuesta.tareaejercicio);
       }
     });
-    console.log('se obtuvieron', this.allTareasEjercicio );
+    console.log('se obtuvieron', this.allTareasEjercicio);
     return this.allTareasEjercicio;
   }
 
@@ -81,20 +81,21 @@ export class TareaEjerciciosService{
 
   getTareasEjercicioByUserId(userId: number): TareaEjercicio[] {
     console.log(this.allTareasEjercicio);
-    return this.allTareasEjercicio.filter(tarea => tarea. usuarioId === userId).map(t => {
+    console.log(this.libroService.allContentPageByEjercicioOpcion);
+    return this.allTareasEjercicio.filter(tarea => tarea.usuarioId === userId).map(t => {
       let libroContent = this.libroService.allContentPageByEjercicioOpcion
         .filter(content => content.ejercicioOpcionId === this.allTareaaEjercicioOpcionRespuesta
-          .filter(tareaRespuesta=> tareaRespuesta.tareaEjercicioId === t.id)[0].ejercicioOpcionPreguntaId)[0];
-      if(libroContent) {
+          .filter(tareaRespuesta => tareaRespuesta.tareaEjercicioId === t.id)[0].ejercicioOpcionPreguntaEjercicioOpcionId)[0];
+      if (libroContent) {
         t.libro = this.libroService.librosData.filter(libro => libro.id === libroContent.libroId)[0].titulo;
         t.tema = libroContent.tema;
         t.pagina = libroContent.numeroPagina;
       }
-        return t;
+      return t;
     });
   }
 
-  saveTareaEjercicio( tareaEjercicio: TareaEjercicio) {
+  saveTareaEjercicio(tareaEjercicio: TareaEjercicio) {
     console.log('Se gauradara est ejercicio: ', tareaEjercicio);
     return this.http.post<TareaEjercicio>(`${environment.apiUrl}/api/tarea-ejercicios`,
       tareaEjercicio,
@@ -107,7 +108,7 @@ export class TareaEjerciciosService{
   }
 
 
-  saveTareaEjercicioRespuestas( tareaEjercicioRespuestas: TareaEjercicioOprecionRespuesta[]) {
+  saveTareaEjercicioRespuestas(tareaEjercicioRespuestas: TareaEjercicioOprecionRespuesta[]) {
     console.log('Se gauradaran estas respuestas: ', tareaEjercicioRespuestas);
     return this.http.post<TareaEjercicio>(`${environment.apiUrl}/api/tarea-ejercicio-opcion-respuestasByTarea`,
       tareaEjercicioRespuestas,

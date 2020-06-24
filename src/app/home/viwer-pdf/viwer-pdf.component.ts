@@ -204,7 +204,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
         this.fillRespuestasIntoPreguntas();
         this.createFormToQuestions();
         console.log(this.tareaEjercicioService.allTareasEjercicio);
-        this.isCurrentEjercicioOpcionResuelto = this.tareaEjercicioService.allTareasEjercicio
+        this.isCurrentEjercicioOpcionResuelto = this.tareaEjercicioService.getTareasEjercicioByUserId(this.authService.currentUserValue.id)
           .filter(tarea => tarea.usuarioId === this.authService.currentUserValue.id &&
             tarea.pagina === this.contentPage.numeroPagina &&
             tarea.libro === this.libroService.currentBook.titulo).length > 0;

@@ -9,4 +9,5 @@ export class TareaEjercicioOprecionRespuesta {
   ejercicioOpcionPreguntaId?: number;
   tareaejercicio?: TareaEjercicio;
   ejercicioOpcionPreguntaEnunciado?: string;
+  ejercicioOpcionPreguntaEjercicioOpcionId?: number;
 }
