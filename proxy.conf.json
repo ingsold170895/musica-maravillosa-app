@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "http://ec2-3-128-73-246.us-east-2.compute.amazonaws.com:8085",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

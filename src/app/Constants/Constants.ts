@@ -12,8 +12,11 @@ export class Constants {
 
   public static PENTAGRAMA_BIGRAMA_ID = 1;
   public static PENTAGRAMA_NORMAL_ID = 2;
-  public static PENTAGRAMA_BIGRAMA_NOMBRE = 'BIGRAMA';
-  public static PENTAGRAMA_NORMAL_NOMBRE = 'PENTAGRAMA';
+  public static PENTAGRAMA_NORMAL_2_ID = 3;
+  public static PENTAGRAMA_BIGRAMA_NOMBRE = 'Pentagrama Infantil';
+  public static PENTAGRAMA_NORMAL_NOMBRE = 'Pentagrama Normal';
+  public static PENTAGRAMA_NORMAL_NOMBRE_2 = 'Pentagrama Normal 2';
+
 
   public static TIPO_EJERCICIO_OPCION_MULTIPLE_ID = 1020;
 

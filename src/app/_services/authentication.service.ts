@@ -40,7 +40,7 @@ export class AuthenticationService {
     this.currentUser = this.currentUserSubject.asObservable();
     this.headers = new HttpHeaders().set('Content-Type', 'application/json');
     if (this.currentUserValue) {
-      this.isTeacher = this.currentUserValue.idPerfil != Constants.PERFIL_USUARIO;
+      this.isTeacher = this.currentUserValue.idPerfil !== Constants.PERFIL_USUARIO;
     }
   }
 
@@ -78,7 +78,7 @@ export class AuthenticationService {
       // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(user)); // guardar token local
       this.currentUserSubject = new BehaviorSubject<User>(user);
-      this.isTeacher = user.idPerfil != Constants.PERFIL_USUARIO ;
+      this.isTeacher = user.idPerfil !== Constants.PERFIL_USUARIO ;
       console.log(this.isTeacher);
       return user;
     }));

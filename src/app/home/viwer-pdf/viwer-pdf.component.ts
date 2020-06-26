@@ -186,9 +186,10 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
         this.enablePrintPentagrama = true;
         this.idPentagramaImprimir = this.contentPage.pentagramaId;
         const namePdf = (this.idPentagramaImprimir === Constants.PENTAGRAMA_BIGRAMA_ID) ? Constants.PENTAGRAMA_BIGRAMA_NOMBRE :
-          (this.idPentagramaImprimir === Constants.PENTAGRAMA_NORMAL_ID) ? Constants.PENTAGRAMA_NORMAL_NOMBRE : 'PENTAGRAMA';
+          (this.idPentagramaImprimir === Constants.PENTAGRAMA_NORMAL_ID) ? Constants.PENTAGRAMA_NORMAL_NOMBRE :
+            (this.idPentagramaImprimir === Constants.PENTAGRAMA_NORMAL_2_ID) ? Constants.PENTAGRAMA_NORMAL_NOMBRE_2: 'PENTAGRAMA';
         this.sourcePentagramaImprimir = './../dist/assets/images/Pentagramas/' + namePdf + '.jpg'
-        this.tituloPentagrama = this.contentPage.pentagramaNombreArchivo;
+        this.tituloPentagrama = this.contentPage.tituloPentagrama;
       }
 
       if (this.contentPage.ejercicioInteractivoId) { // PERMITIR HACER EJERCICIO INTERACTIVO

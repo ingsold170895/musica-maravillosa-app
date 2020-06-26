@@ -6,6 +6,7 @@ export class LibroContenido {
   archivoVideo?: string;
   imprimir?: boolean;
   pentagramaId?: number;
+  tituloPentagrama?: string;
   pentagramaNombreArchivo?: string;
   ejercicioOpcionId?: number;
   ejercicioInteractivoId?: number;

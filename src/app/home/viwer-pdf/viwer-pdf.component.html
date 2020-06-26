@@ -193,8 +193,22 @@
 <app-modal-password id="{{idModalDetails}}">
   <div style="text-align: center">
     <mat-card >
-      <mat-card-header>Detalles del Libro</mat-card-header>
-      <mat-card-content>
+      <mat-card-header></mat-card-header>
+      <mat-card-content style="text-align: -webkit-center;">
+        <div class="text-justify" style="width: 80%">
+          <div style="height: 25vh; width: 25vh; margin: auto; margin-bottom: 2rem;">
+          <img src="assets/images/Natalia_Kovalenko_square.jpg" style="border-radius: 100%; width: inherit;">
+          </div>
+          <p>
+            Música Maravillosa fue creada por la Maestra rusa <b>Natalia Kovalenko</b>. Pianista concertista, capacitadora y gestora cultural radicada en Ecuador más de dos décadas de años. Es fundadora de dos Conservatorios en Quito, entre ellos Mozedu.
+          Después de un largo trabajo de capacitación e investigación en el campo de enseñanza con profesores y niños, Natalia Kovalenko crea el sistema Música Maravillosa con el afán de compartir conocimientos y ampliar la visión de maestros en cuanto a objetivos para lograr y abastecer de recursos a profesores de música.
+          En Música Maravillosa encuentra lo mejor de la metodología rusa, adaptado a las necesidades y a la realidad de Latinoamérica, generando un proceso de enseñanza- aprendizaje interactivo.
+          </p>
+        </div>
+        <br/>
+        <p>
+          Los libros físicos también los puedes adquirir. Visita nuestra tienda en nuestra página <a href="www.musicamaravillosa.com">www.musicamaravillosa.com</a>
+        </p>
         <div>
           <div style="font-weight: bold;">Autor:</div>
           {{libroService.currentBook.autor}} </div>

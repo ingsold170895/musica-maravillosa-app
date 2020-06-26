@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //CHECKING FOR UPDATES
+
     this.ipcService.on("message", (event: Electron.IpcMessageEvent)=>{
       console.log(event);
     });
@@ -80,6 +81,8 @@ export class LoginComponent implements OnInit {
       this.errorPassword = "Actualización en curso";
     } else {
 
+
+
       // redirect to home if already logged in
       if (this.authenticationService.currentUserValue ) {
         this.authenticationService.headers.append('Authorization', 'Bearer ' + this.authenticationService.token);
@@ -91,8 +94,8 @@ export class LoginComponent implements OnInit {
     }
 
 
-    console.log(isUpdateReady);
     this.version_app = version_app;
+   // this.version_app = "Web Version";
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -179,6 +182,8 @@ export class LoginComponent implements OnInit {
                   this.textButton = 'Entrar';
                   this.resetSuccess = '';
                 }
+
+
               } else {
                 this.modalService.open('1');
               }

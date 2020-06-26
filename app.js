@@ -50,7 +50,7 @@ function initWindow() {
   if (process.platform === 'darwin') {
     app.dock.hide();
   }
-  //appWindow.removeMenu();
+  appWindow.removeMenu();
 
 
   // Initialize the DevTools.

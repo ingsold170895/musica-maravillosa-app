@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
             by: access.libro.autor,
             description: access.libro.descripcion,
             urlImage: `assets/images/portadas/${access.libro.titulo}.jpg`,
-            showGuide: access.guiaDidactica && this.authenticationService.isTeacher,
+            showGuide: this.authenticationService.isTeacher,
             showFonoteca: this.authenticationService.isTeacher
           };
         }
