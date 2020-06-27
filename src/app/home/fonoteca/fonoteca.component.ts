@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LibroService} from '@app/_services/libro.service';
 import {LibroAudio} from '@app/_models/LibroAudio';
-import {Track} from 'ngx-audio-player';
+//import {Track} from 'ngx-audio-player';
 import {TipoAudio} from "@app/_models/TipoAudio";
+import {Track} from "@app/ngx-audio-player/model/track.model";
 
 @Component({
   selector: 'app-fonoteca',

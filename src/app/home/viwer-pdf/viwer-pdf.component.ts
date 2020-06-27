@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {Track} from 'ngx-audio-player';
 import {AudioService} from '@app/_services/audio.service';
 import {StreamState} from '@app/_models/stream-state';
+//import {Track} from 'ngx-audio-player';
 import {Pagina} from '@app/_models/Pagina';
 import {LibroService} from '@app/_services/libro.service';
 import {LibroContenido} from '@app/_models/LibroContenido';
@@ -24,6 +24,7 @@ import {TareaEjerciciosService} from "@app/_services/tareaEjercicios.service";
 import {TareaEjercicioOprecionRespuesta} from "@app/_models/TareaEjercicioOprecionRespuesta";
 import * as printJS from 'print-js'
 import {sha256} from "js-sha256";
+import {Track} from "@app/ngx-audio-player/model/track.model";
 
 
 declare function prepareButtonPrintPentagrama(): any;
@@ -352,6 +353,12 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
     this.ngAfterViewInit();
   }
 
+  cleanSrcAudioPLayer() {
+    const audioPlayer = document.getElementById('audio-player');
+    const audio = audioPlayer.getElementsByTagName('audio')[0];
+    audio.setAttribute('src', '');
+  }
+
   ngAfterViewInit() { // CAMBIO DEL DISEÑO DE EL MULTIPLAYER
     const div = document.getElementById('viewerContainer');
     div.style.overflowY = 'hidden';
@@ -380,9 +387,11 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
       cardButtonsPlayer.classList.add('text-center');
     }
     const tablePlayList = audioPlayer.getElementsByTagName('table');
-    if (tablePlayList[0].childNodes[0].nodeName === 'THEAD') {
+    /*if (tablePlayList[0].childNodes[0].nodeName === 'THEAD') {
       tablePlayList[0].removeChild(tablePlayList[0].childNodes[0]);
     }
+
+     */
 
     //oculatr mat-paginator-page-size
     const divTextItemsContainer = audioPlayer.getElementsByClassName('mat-paginator-page-size');
@@ -400,8 +409,8 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
     paginatorTexts[0].classList.add('text-center');
 
     // set text of 'Play List'
-    const playListText = audioPlayer.getElementsByClassName('mat-content');
-    playListText[0].textContent = 'Lista de Audios';
+   // const playListText = audioPlayer.getElementsByClassName('mat-content');
+   // playListText[0].textContent = 'Lista de Audios';
 
     // set min-width o mat-slider
     const matSlider = audioPlayer.getElementsByTagName('mat-slider');

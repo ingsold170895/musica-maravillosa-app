@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HOME_ROUTE} from './home-routing.module';
 import { ViwerPdfComponent } from './viwer-pdf/viwer-pdf.component';
 import {JhMaterialModule} from '../jh-material.module';
-import {NgxAudioPlayerModule} from 'ngx-audio-player';
+//import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {FlexModule, GridModule} from '@angular/flex-layout';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import {HomeComponent} from './home.component';
@@ -22,6 +22,7 @@ import { ClassroomDataComponent } from './classroom-data/classroom-data.componen
 import { PentagramaPdfComponent } from './viwer-pdf/pentagrama-pdf/pentagrama-pdf.component';
 import { MyClassComponent } from './my-class/my-class.component';
 import { ExportAllStudentsComponent } from './classroom-data/export-all-students/export-all-students.component';
+import {NgxAudioPlayerModule} from "@app/ngx-audio-player/ngx-audio-player.module";
 
 const routes: Routes = [
   {

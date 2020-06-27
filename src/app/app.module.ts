@@ -6,13 +6,14 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {DefaultModule} from './layout/default/default.module';
 import {JhMaterialModule} from './jh-material.module';
-import {NgxAudioPlayerModule} from 'ngx-audio-player';
+//import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BasicAuthInterceptor} from './_helpers/basic-auth.interceptor';
 import {fakeBackendProvider} from './_helpers/fake-backend';
 import { HttpClientModule} from '@angular/common/http';
 import {ModalModule} from '@app/_modals/modal-password.module';
 import {ErrorInterceptor} from '@app/_helpers/error.interceptor';
+import {NgxAudioPlayerModule} from "@app/ngx-audio-player/ngx-audio-player.module";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {ErrorInterceptor} from '@app/_helpers/error.interceptor';
     NgxAudioPlayerModule,
     HttpClientModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     fakeBackendProvider
   ],
