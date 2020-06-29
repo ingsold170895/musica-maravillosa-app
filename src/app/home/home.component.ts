@@ -57,8 +57,11 @@ export class HomeComponent implements OnInit {
           };
         }
       });
-    }, () => {
+    }, (error) => {
       console.log('Hubo un Error al cargar los Libros');
+      if (error.toString() === 'Error de Autenticación' || error.toString() === 'Bad credentials') {
+        this.authenticationService.logout();
+      }
     }, () => {
       this.loadingData = false;
       console.log('ids de libros: ', this.libroService.getIdsLibrosByAccess());

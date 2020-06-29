@@ -25,6 +25,7 @@ import {TareaEjercicioOprecionRespuesta} from "@app/_models/TareaEjercicioOpreci
 import * as printJS from 'print-js'
 import {sha256} from "js-sha256";
 import {Track} from "@app/ngx-audio-player/model/track.model";
+import {AudioPlayerService} from "@app/ngx-audio-player/service/audio-player-service/audio-player.service";
 
 
 declare function prepareButtonPrintPentagrama(): any;
@@ -131,6 +132,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
               private authService: AuthenticationService,
               private router: Router,
               private formBuilder: FormBuilder,
+              private audioPlayerService: AudioPlayerService,
               private tareaEjercicioService: TareaEjerciciosService,
               public ejercicioOpcionService: EjercicioOpcionService) {
     // listen to stream state
@@ -224,7 +226,7 @@ export class ViwerPdfComponent implements OnInit, AfterViewInit {
     this.tituloPentagrama = '';
     this.contentPage = new LibroContenido();
     this.narracionSource = '';
-    this.msaapPlaylist = [{title: 'Sin Audios', link: ''}];
+    this.msaapPlaylist = [];
     this.isPlayingNarrador = false;
     this.isPlayingKaraoke = false;
     this.enablePrintPage = false;

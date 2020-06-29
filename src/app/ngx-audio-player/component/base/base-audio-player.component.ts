@@ -89,6 +89,7 @@ export class BaseAudioPlayerFunctions {
         }
     }
 
+
     play(track?: Track): void {
 
         if (track) {
@@ -97,7 +98,12 @@ export class BaseAudioPlayerFunctions {
         }
 
         setTimeout(() => {
+          try {
             this.player.nativeElement.play();
+          }catch(e){
+            console.log(e.message);
+            console.log("Archivo no cargado");
+          }
         }, 50);
 
     }
