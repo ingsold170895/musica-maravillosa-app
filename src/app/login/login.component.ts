@@ -172,19 +172,16 @@ export class LoginComponent implements OnInit {
           if (data.id_token != null) {
             this.authenticationService.requestAccount().pipe(first()).subscribe(user => {
               if (user.token === '') {
-              //  if (user.macaddressData === DataComputer) {
+               if (user.macaddressData === DataComputer) {
                   this.authenticationService.wasLogged = false;
                   this.router.navigate(['/music/home']);
-              /*  } else {
+               } else {
                   this.error = 'Esta computadora no esta registrada para este Usuario. Utiliza "Olvide mi contraseña" para registrarte en esta computadora. "';
                   this.loading = false;
                   this.submitted = false;
                   this.textButton = 'Entrar';
                   this.resetSuccess = '';
                 }
-
-
-               */
 
 
               } else {
